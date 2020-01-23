@@ -2,9 +2,8 @@ from abc import ABC, abstractmethod
 
 
 class AbstractModelComparer(ABC):
-    @staticmethod
     @abstractmethod
-    def compare(models):
+    def compare(self, models):
         """
         Takes a list of models and determines of subset that have the most desirable fitness.
 
