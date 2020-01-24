@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class AbstractLearningAlgorithm(ABC):
+class AbstractLearner(ABC):
     """
     The common interface for that tunepy expects from all machine learning algorithms.
     """
