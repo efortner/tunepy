@@ -2,6 +2,10 @@ from abc import ABC, abstractmethod
 
 
 class AbstractModelComparer(ABC):
+    """
+    The common interface for that tunepy expects from all model comparers.
+    """
+
     @abstractmethod
     def compare(self, models):
         """
