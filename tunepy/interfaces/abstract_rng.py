@@ -7,15 +7,6 @@ class AbstractRandomNumberGenerator(ABC):
     """
 
     @abstractmethod
-    def __init__(self, seed):
-        """
-        Creates a new random number generator.
-        :param seed: The seed that will be used for this random number generator.
-        """
-        self.seed = seed
-        super().__init__()
-
-    @abstractmethod
     def random_int(self, minimum, maximum, shape):
         """
         Builds an array-like structure of random integers.
