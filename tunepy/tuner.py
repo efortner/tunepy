@@ -1,3 +1,4 @@
+from tunepy.random import PythonBaseRNG
 
 
 class Tuner:
@@ -15,20 +16,46 @@ class Tuner:
             Creates a new Tuner.Builder.
             :param x: Array-like data set features.
             :param y: Vector of data set labels.
-            :param model_builder: An object that builds learners.
+            :param model_builder: An object that builds learners. Must comply to tunepy's AbstractModelBuilder
+            interface.
             """
-            self.bundle = {
+            self._bundle = {
                 'x': x,
                 'y': y,
                 'builder': model_builder,
+                'rng': PythonBaseRNG,
+                'optimizer': None,
             }
+
+        def set_rng(self, rng):
+            """
+            Sets the random number generator that will be used. Must comply to tunepy's AbstractRandomNumberGenerator
+            interface.
+            :param rng: A object of a class that implements AbstractRandomNumberGenerator.
+            :return: This builder.
+            """
+            self._bundle['rng'] = rng
+            return self
+
+        def set_optimizer(self, optimizer):
+            """
+            Sets the hyperparameter optimizer that will be used.
+            :param optimizer: An optimizer object of a class that implement's tunepy's AbstractOptimizer interface.
+            :return: This builder.
+            """
+            self._bundle['optimizer'] = optimizer
+            return self
 
         def build(self):
             """
             Creates a new instance of Tuner container the properties specified by the builder.
             :return: A new instance of Tuner.
             """
-            return Tuner(self.bundle)
+            return Tuner(self._bundle)
 
     def __init__(self, bundle):
-        pass
+        self._x = bundle['x']
+        self._y = bundle['y']
+        self._model_builder = bundle['builder']
+        self._rng = bundle['rng']
+        self._optimizer = bundle['optimizer']
