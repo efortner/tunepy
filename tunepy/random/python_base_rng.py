@@ -21,12 +21,19 @@ class PythonBaseRNG(AbstractRandomNumberGenerator):
 
         def traverse_next_dimension(new_shape, array):
             if len(new_shape) == 1:
-                array.append(build_base_case_array(new_shape[0]))
+                append_new_random_vector(new_shape[0], array)
             else:
-                array.append(traverse_next_dimension(new_shape[1:], array))
-            return array
+                append_new_list_and_recurse(new_shape, array)
 
-        def build_base_case_array(length):
-            return [random.randrange(minimum, maximum) for _ in range(length)]
+        def append_new_random_vector(length, array):
+            for _ in range(length):
+                array.append(random.randrange(minimum, maximum))
 
-        return traverse_next_dimension(shape, [])
+        def append_new_list_and_recurse(new_shape, array):
+            for _ in range(new_shape[0]):
+                array.append([])
+                traverse_next_dimension(new_shape[1:], array[-1])
+
+        return_array = []
+        traverse_next_dimension(shape, return_array)
+        return return_array
