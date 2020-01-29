@@ -54,6 +54,10 @@ class Tuner:
             return Tuner(self._bundle)
 
     def __init__(self, bundle):
+        """
+        Use Tuner.Builder to create instances of Tuner.
+        :param bundle: An object created by Tuner.Builder.
+        """
         self._x = bundle['x']
         self._y = bundle['y']
         self._model_builder = bundle['builder']
