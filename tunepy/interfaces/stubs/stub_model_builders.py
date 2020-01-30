@@ -4,8 +4,11 @@ from tunepy.interfaces.stubs import ConstantFitnessLearner
 
 class ConstantFitnessLearnerBuilder(AbstractModelBuilder):
     """
-    Builds ConstantFitnessLearners
+    Builds ConstantFitnessLearners.
     """
 
+    def __init__(self, fitness):
+        self._fitness = fitness
+
     def build(self, bitstring):
-        return ConstantFitnessLearner()
+        return ConstantFitnessLearner(self._fitness)

@@ -3,8 +3,11 @@ from tunepy.interfaces import AbstractLearner
 
 class ConstantFitnessLearner(AbstractLearner):
     """
-    A learner with a fitness of 0.0.
+    A learner with a fitness defined on construction.
     """
+
+    def __init__(self, fitness):
+        self._fitness = fitness
 
     def fit(self, x, y):
         pass
@@ -14,4 +17,4 @@ class ConstantFitnessLearner(AbstractLearner):
 
     @property
     def fitness(self):
-        return 0.0
+        return self._fitness
