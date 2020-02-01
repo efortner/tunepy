@@ -7,22 +7,23 @@ class AbstractLearner(ABC):
     """
 
     @abstractmethod
-    def fit(self, x, y):
+    def fit(self, x_train, y_train):
         """
         Trains the model on a labeled dataset.
 
-        :param x: Array-like table of features.
-        :param y: Vector of labels.
+        :param x_train: Array-like table of features.
+        :param y_train: Vector of labels.
         """
         pass
 
     @abstractmethod
-    def evaluate(self, x):
+    def evaluate(self, x_test, y_test):
         """
         Returns a fitness score after predicting labels on a dataset. Higher fitness
         scores indicate better performance.
 
-        :param x: Array-like table of features.
+        :param x_test: Array-like table of features.
+        :param y_test: Array-like vector of labels for fitness evaluation.
         :return: A fitness score.
         """
         pass

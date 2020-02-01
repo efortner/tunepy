@@ -9,10 +9,10 @@ class ConstantFitnessLearner(AbstractLearner):
     def __init__(self, fitness):
         self._fitness = fitness
 
-    def fit(self, x, y):
+    def fit(self, x_train, y_train):
         pass
 
-    def evaluate(self, x):
+    def evaluate(self, x_test, y_test):
         return self.fitness
 
     @property
