@@ -30,18 +30,19 @@ class CrossValidator(AbstractValidator):
         if len(x) != len(y):
             raise DataMismatchException
 
-        self._divide_data(x, y)
+        self._divide_test_data(x, y)
+        self._divide_train_data(x, y)
 
         total_fitness = 0.0
 
-        for _ in range(self._bins):
+        for index in range(self._bins):
             model_copy = deepcopy(model)
-            model_copy.fit(self._feature_bins_train[self._bins], self._label_bins_train[self._bins])
-            model_copy.evaluate(self._label_bins_test[self._bins], self._label_bins_train[self._bins])
+            model_copy.fit(self._feature_bins_train[index], self._label_bins_train[index])
+            model_copy.evaluate(self._label_bins_test[index], self._label_bins_train[index])
             total_fitness += model_copy.fitness
         return float(total_fitness / self._bins)
 
-    def _divide_data(self, x, y):
+    def _divide_test_data(self, x, y):
         total_rows = len(y)
         extra_rows = total_rows % self._bins
         bin_size = int((total_rows - extra_rows) / self._bins)
@@ -49,21 +50,33 @@ class CrossValidator(AbstractValidator):
         self._feature_bins_test = [None for _ in range(self._bins)]
         self._label_bins_test = [None for _ in range(self._bins)]
 
-        self._feature_bins_train = [None for _ in range(self._bins)]
-        self._label_bins_train = [None for _ in range(self._bins)]
-
         for index in range(self._bins):
             start_slice = index * bin_size
             end_slice = (index + 1) * bin_size
             if index == self._bins - 1:
                 self._feature_bins_test[index] = x[start_slice:]
                 self._label_bins_test[index] = y[start_slice:]
-
-                self._feature_bins_train[index] = x[:start_slice]
-                self._label_bins_train[index] = y[:start_slice]
             else:
                 self._feature_bins_test[index] = x[start_slice:end_slice]
                 self._label_bins_test[index] = y[start_slice:end_slice]
 
+    def _divide_train_data(self, x, y):
+        total_rows = len(y)
+        extra_rows = total_rows % self._bins
+        bin_size = int((total_rows - extra_rows) / self._bins)
+
+        self._feature_bins_train = [None for _ in range(self._bins)]
+        self._label_bins_train = [None for _ in range(self._bins)]
+
+        for index in range(self._bins):
+            start_slice = index * bin_size
+            end_slice = (index + 1) * bin_size
+            if index == 0:
+                self._feature_bins_train[index] = x[end_slice:]
+                self._label_bins_train[index] = y[end_slice:]
+            elif index == self._bins - 1:
+                self._feature_bins_train[index] = x[:start_slice]
+                self._label_bins_train[index] = y[:start_slice]
+            else:
                 self._feature_bins_train[index] = np.concatenate((x[:start_slice], x[end_slice:]), axis=0)
                 self._label_bins_train[index] = np.concatenate((y[:start_slice], y[end_slice:]), axis=0)
