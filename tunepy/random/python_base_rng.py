@@ -7,6 +7,13 @@ class PythonBaseRNG(AbstractRandomNumberGenerator):
     A tunepy wrapper of the built in Python random number generator.
     """
 
+    def random(self):
+        """
+        Returns a random number between 0 and 1.
+        :return: A single random number between 0 and 1.
+        """
+        return random.random()
+
     def __init__(self, seed):
         random.seed(seed)
 

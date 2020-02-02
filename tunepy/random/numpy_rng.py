@@ -7,6 +7,13 @@ class NumpyRNG(AbstractRandomNumberGenerator):
     A tunepy wrapper for the number random number generator.
     """
 
+    def random(self):
+        """
+        Returns a random number between 0 and 1.
+        :return: A single random number between 0 and 1.
+        """
+        return np.random.random()
+
     def __init__(self, seed):
         np.random.seed(seed)
 

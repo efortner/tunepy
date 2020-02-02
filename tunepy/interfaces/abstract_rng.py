@@ -17,6 +17,14 @@ class AbstractRandomNumberGenerator(ABC):
         """
         pass
 
+    @abstractmethod
+    def random(self):
+        """
+        Returns a random number between 0 and 1.
+        :return: A single random number between 0 and 1.
+        """
+        pass
+
     def random_int(self, minimum, maximum):
         """
         Returns a single random integer.
