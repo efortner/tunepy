@@ -10,7 +10,7 @@ class PythonBaseRNG(AbstractRandomNumberGenerator):
     def __init__(self, seed):
         random.seed(seed)
 
-    def random_int(self, minimum, maximum, shape):
+    def random_int_array(self, minimum, maximum, shape):
         """
         Builds an array-like structure of random integers.
         :param minimum: Minimum integer value (inclusive).
