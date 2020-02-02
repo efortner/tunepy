@@ -12,6 +12,6 @@ class AbstractModelComparer(ABC):
         Takes a list of models and determines of subset that have the most desirable fitness.
 
         :param models: Vector of models that implement the AbstractLearningAlgorithm interface.
-        :return: Vector containing a filtered list of models.
+        :return: A single model that has been determined to be the best.
         """
         pass
