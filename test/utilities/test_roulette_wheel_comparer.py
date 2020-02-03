@@ -64,7 +64,7 @@ class TestRouletteWheelComparer(unittest.TestCase):
 
         self.assertTrue(first_check)
         self.assertFalse(second_check)
-        self.assertEqual(10, comparer._max_fitness)
+        self.assertAlmostEqual(10, comparer._max_fitness)
 
 if __name__ == '__main__':
     unittest.main()
