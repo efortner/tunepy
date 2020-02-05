@@ -19,31 +19,31 @@ class RouletteWheelComparer(AbstractModelComparer):
         self._all_fitness = None
         self._max_fitness = -float('inf')
 
-    def compare(self, models):
+    def compare(self, genomes):
         """
         Returns one model for the provided list of models chosen by roulette wheel style selection.
-        :param models: Array-like of objects implementing AbstractLearner.
+        :param genomes: Array-like of genomes.
         :return: One model object from models.
         """
 
-        self._extract_fitness_from_models(models)
+        self._extract_fitness_from_genomes(genomes)
 
         while True:
-            chosen_model = models[self._rng.random_int(0, len(models))]
-            acceptance_probability = chosen_model.fitness / self._max_fitness
+            chosen_genome = genomes[self._rng.random_int(0, len(genomes))]
+            acceptance_probability = chosen_genome.fitness / self._max_fitness
             if acceptance_probability > self._rng.random():
-                return chosen_model
+                return chosen_genome
 
-    def _extract_fitness_from_models(self, models):
-        new_hash_models = hash(tuple(models))
+    def _extract_fitness_from_genomes(self, genomes):
+        new_hash_models = hash(tuple(genomes))
         if new_hash_models == self._hash_models:
             return False
 
         self._hash_models = new_hash_models
-        self._all_fitness = np.zeros(shape=(len(models),))
+        self._all_fitness = np.zeros(shape=(len(genomes),))
 
-        for index in range(len(models)):
-            self._all_fitness[index] = models[index].fitness
+        for index in range(len(genomes)):
+            self._all_fitness[index] = genomes[index].fitness
 
         self._max_fitness = np.max(self._all_fitness)
         return True

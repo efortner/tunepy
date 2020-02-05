@@ -13,6 +13,6 @@ class AbstractValidator(ABC):
         :param x: Array-like dataset features.
         :param y: Array-like dataset labels.
         :param model: An untrained model of a class than implements AbstractLearner.
-        :return:
+        :return: A fitness score.
         """
         pass

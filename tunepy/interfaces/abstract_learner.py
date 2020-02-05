@@ -36,3 +36,4 @@ class AbstractLearner(ABC):
 
         :return: The fitness score of this machine learning model.
         """
+        pass

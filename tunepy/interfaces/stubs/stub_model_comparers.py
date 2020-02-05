@@ -6,10 +6,10 @@ class PassThroughComparer(AbstractModelComparer):
     Returns the first item passed into it.
     """
 
-    def compare(self, models):
+    def compare(self, genomes):
         """
         Compares a set of models naively.
-        :param models: Array-like of models.
+        :param genomes: Array-like of genomes.
         :return: THe first model at the zero index of models.
         """
-        return models[0]
+        return genomes[0]

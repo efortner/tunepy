@@ -59,8 +59,8 @@ class TestRouletteWheelComparer(unittest.TestCase):
         comparer = RouletteWheelComparer(rng)
         models = [ConstantFitnessLearner(10 - index) for index in range(10)]
 
-        first_check = comparer._extract_fitness_from_models(models)
-        second_check = comparer._extract_fitness_from_models(models)
+        first_check = comparer._extract_fitness_from_genomes(models)
+        second_check = comparer._extract_fitness_from_genomes(models)
 
         self.assertTrue(first_check)
         self.assertFalse(second_check)
