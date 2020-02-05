@@ -7,6 +7,10 @@ class ConstantFitnessLearnerBuilder(AbstractModelBuilder):
     Builds ConstantFitnessLearners.
     """
 
+    @staticmethod
+    def generate_bitstring(rng):
+        return [0]
+
     def __init__(self, fitness):
         self._fitness = fitness
 

@@ -23,3 +23,11 @@ class AbstractOptimizer(ABC):
         :return: A boolean true when this algorithm has converged or false if not.
         """
         pass
+
+    @property
+    @abstractmethod
+    def best_genome(self):
+        """
+        The best genome so far. A value should only be assumed when self.converged is true.
+        :return: A Genome object.
+        """

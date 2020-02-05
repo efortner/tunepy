@@ -7,6 +7,10 @@ class ConvergedOptimizer(AbstractOptimizer):
     """
 
     @property
+    def best_genome(self):
+        return None
+
+    @property
     def converged(self):
         return True
 

@@ -14,3 +14,13 @@ class AbstractModelBuilder(ABC):
         :return: A new, untrained learner.
         """
         pass
+
+    @staticmethod
+    @abstractmethod
+    def generate_bitstring(rng):
+        """
+        Generates a new bitstring of the correct dimensions for this model builder.
+        :param rng: A random number generator that implements AbstractRandomNumberGenerator.
+        :return: A bitstring.
+        """
+        pass
