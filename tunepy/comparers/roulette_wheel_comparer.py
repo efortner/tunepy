@@ -17,7 +17,7 @@ class RouletteWheelComparer(AbstractModelComparer):
         self._rng = random_number_generator
         self._hash_models = 0
         self._all_fitness = None
-        self._max_fitness = 0.0
+        self._max_fitness = -float('inf')
 
     def compare(self, models):
         """
