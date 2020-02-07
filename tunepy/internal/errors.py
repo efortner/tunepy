@@ -2,5 +2,5 @@ class CrossValidatorBinException(Exception):
     pass
 
 
-class DataMismatchException(Exception):
+class DimensionsMismatchException(Exception):
     pass

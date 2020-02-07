@@ -23,7 +23,7 @@ class TestCrossValidator(unittest.TestCase):
 
         validator = CrossValidator(5)
 
-        with self.assertRaises(DataMismatchException):
+        with self.assertRaises(DimensionsMismatchException):
             validator.validate(data_features, data_labels, None)
 
     def test_evaluation_bin_sizes(self):

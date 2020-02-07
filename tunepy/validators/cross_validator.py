@@ -32,7 +32,7 @@ class CrossValidator(AbstractValidator):
         :return:
         """
         if len(x) != len(y):
-            raise DataMismatchException
+            raise DimensionsMismatchException
 
         self.build_test_bins(x, y)
         self.build_train_bins(x, y)
