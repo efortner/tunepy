@@ -18,6 +18,10 @@ class CrossValidator(AbstractValidator):
         if bins < 2:
             raise CrossValidatorBinException
         self._bins = bins
+        self._feature_bins_train = []
+        self._feature_bins_test = []
+        self._label_bins_train = []
+        self._label_bins_test = []
 
     def validate(self, x, y, model):
         """
@@ -30,8 +34,8 @@ class CrossValidator(AbstractValidator):
         if len(x) != len(y):
             raise DataMismatchException
 
-        self._divide_test_data(x, y)
-        self._divide_train_data(x, y)
+        self.build_test_bins(x, y)
+        self.build_train_bins(x, y)
 
         total_fitness = 0.0
 
@@ -42,7 +46,13 @@ class CrossValidator(AbstractValidator):
             total_fitness += model_copy.fitness
         return float(total_fitness / self._bins)
 
-    def _divide_test_data(self, x, y):
+    def build_test_bins(self, x, y):
+        """
+        Creates a set of test bins from the provided data set. Mutually exclusive with bins created by
+        CrossValidator.build_train_bins(x, y).
+        :param x: Array-like of features.
+        :param y: Vector of labels.
+        """
         total_rows = len(y)
         extra_rows = total_rows % self._bins
         bin_size = int((total_rows - extra_rows) / self._bins)
@@ -60,7 +70,13 @@ class CrossValidator(AbstractValidator):
                 self._feature_bins_test[index] = x[start_slice:end_slice]
                 self._label_bins_test[index] = y[start_slice:end_slice]
 
-    def _divide_train_data(self, x, y):
+    def build_train_bins(self, x, y):
+        """
+        Creates a set of training bins from the provided data set. Mutually exclusive with bins created by
+        CrossValidator.build_test_bins(x, y).
+        :param x: Array-like of features.
+        :param y: Vector of labels.
+        """
         total_rows = len(y)
         extra_rows = total_rows % self._bins
         bin_size = int((total_rows - extra_rows) / self._bins)
@@ -80,3 +96,26 @@ class CrossValidator(AbstractValidator):
             else:
                 self._feature_bins_train[index] = np.concatenate((x[:start_slice], x[end_slice:]), axis=0)
                 self._label_bins_train[index] = np.concatenate((y[:start_slice], y[end_slice:]), axis=0)
+
+    @property
+    def bins(self):
+        return self._bins
+
+    @property
+    def training_data_features(self):
+        return self._feature_bins_train
+
+    @property
+    def training_data_labels(self):
+        return self._label_bins_train
+
+    @property
+    def test_data_features(self):
+        return self._feature_bins_test
+
+    @property
+    def test_data_labels(self):
+        return self._label_bins_test
+
+
+

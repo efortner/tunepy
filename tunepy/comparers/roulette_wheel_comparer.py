@@ -26,7 +26,7 @@ class RouletteWheelComparer(AbstractModelComparer):
         :return: One model object from models.
         """
 
-        self._extract_fitness_from_genomes(genomes)
+        self.extract_fitness_from_genomes(genomes)
 
         while True:
             chosen_genome = genomes[self._rng.random_int(0, len(genomes))]
@@ -34,7 +34,13 @@ class RouletteWheelComparer(AbstractModelComparer):
             if acceptance_probability > self._rng.random():
                 return chosen_genome
 
-    def _extract_fitness_from_genomes(self, genomes):
+    def extract_fitness_from_genomes(self, genomes):
+        """
+        Iterates over all provided genomes and caches their fitness values. This operation is skipped if the
+        provided genomes have already been cached.
+        :param genomes: Iterable of genomes.
+        :return: True if this set of genomes needed to be cached. Else, false.
+        """
         new_hash_models = hash(tuple(genomes))
         if new_hash_models == self._hash_models:
             return False

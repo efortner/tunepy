@@ -39,16 +39,16 @@ class TestCrossValidator(unittest.TestCase):
             [0, 1, 2, 3, 4, 5]
 
         validator = CrossValidator(5)
-        validator._divide_test_data(data_features, data_labels)
+        validator.build_test_bins(data_features, data_labels)
 
-        self.assertEqual(5, len(validator._feature_bins_test))
-        self.assertEqual(5, len(validator._label_bins_test))
+        self.assertEqual(5, len(validator.test_data_features))
+        self.assertEqual(5, len(validator.test_data_labels))
 
-        self.assertEqual(1, len(validator._feature_bins_test[0]))
-        self.assertEqual(1, len(validator._label_bins_test[0]))
+        self.assertEqual(1, len(validator.test_data_features[0]))
+        self.assertEqual(1, len(validator.test_data_labels[0]))
 
-        self.assertEqual(2, len(validator._feature_bins_test[-1]))
-        self.assertEqual(2, len(validator._label_bins_test[-1]))
+        self.assertEqual(2, len(validator.test_data_features[-1]))
+        self.assertEqual(2, len(validator.test_data_labels[-1]))
 
     def test_train_bin_sizes(self):
         data_features = \
@@ -63,16 +63,16 @@ class TestCrossValidator(unittest.TestCase):
             [0, 1, 2, 3, 4, 5]
 
         validator = CrossValidator(5)
-        validator._divide_train_data(data_features, data_labels)
+        validator.build_train_bins(data_features, data_labels)
 
-        self.assertEqual(5, len(validator._feature_bins_train))
-        self.assertEqual(5, len(validator._label_bins_train))
+        self.assertEqual(5, len(validator.training_data_features))
+        self.assertEqual(5, len(validator.training_data_labels))
 
-        self.assertEqual(5, len(validator._feature_bins_train[0]))
-        self.assertEqual(5, len(validator._label_bins_train[0]))
+        self.assertEqual(5, len(validator.training_data_features[0]))
+        self.assertEqual(5, len(validator.training_data_labels[0]))
 
-        self.assertEqual(4, len(validator._feature_bins_train[-1]))
-        self.assertEqual(4, len(validator._label_bins_train[-1]))
+        self.assertEqual(4, len(validator.training_data_features[-1]))
+        self.assertEqual(4, len(validator.training_data_labels[-1]))
 
     def test_validation_result(self):
         data_features = \
