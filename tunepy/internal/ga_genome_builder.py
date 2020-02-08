@@ -15,8 +15,7 @@ class GeneticAlgorithmGenomeBuilder(AbstractGenomeBuilder):
     def build(self, prior_genomes):
         def recursive_gene_selection(sub_dimensions, sub_new_bitstring, sub_left_bitstring, sub_right_bitstring):
             if not (sub_dimensions[0] == len(sub_right_bitstring) and
-                    sub_dimensions[0] != len(sub_left_bitstring) and
-                    sub_dimensions[0] != len(sub_new_bitstring)):
+                    sub_dimensions[0] == len(sub_left_bitstring)):
                 raise DimensionsMismatchException
 
             if len(sub_dimensions) == 1:
@@ -25,7 +24,7 @@ class GeneticAlgorithmGenomeBuilder(AbstractGenomeBuilder):
                         if self._rng.random() < 0.5:
                             sub_new_bitstring[index] = sub_left_bitstring[index]
                         else:
-                            sub_left_bitstring[index] = sub_right_bitstring[index]
+                            sub_new_bitstring[index] = sub_right_bitstring[index]
             else:
                 for index in range(sub_dimensions[0]):
                     recursive_gene_selection(
