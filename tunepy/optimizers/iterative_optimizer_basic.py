@@ -1,7 +1,7 @@
 from tunepy.interfaces import AbstractOptimizer
 
 
-class GeneticOptimizer(AbstractOptimizer):
+class BasicIterativeOptimizer(AbstractOptimizer):
     """
     Optimizes fitness using successive refinements of a random population of solutions.
     """
