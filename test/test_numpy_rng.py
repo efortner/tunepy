@@ -5,7 +5,7 @@ import numpy as np
 
 class TestNumpyRNG(unittest.TestCase):
     def test_values_in_range(self):
-        random = NumpyRNG(7)
+        random = NumpyRNG(7, integer_type=np.int_)
         array = random.random_int_array(0, 5, shape=(10,))
 
         for random_number in array:
@@ -13,7 +13,7 @@ class TestNumpyRNG(unittest.TestCase):
             self.assertLess(random_number, 5)
 
     def test_shape_one_dimensional(self):
-        random = NumpyRNG(7)
+        random = NumpyRNG(7, integer_type=np.int_)
         array = random.random_int_array(0, 2, shape=(10,))
 
         self.assertEqual(len(array), 10)
@@ -21,7 +21,7 @@ class TestNumpyRNG(unittest.TestCase):
             self.assertIsInstance(random_number, np.int_)
 
     def test_shape_two_dimensional(self):
-        random = NumpyRNG(7)
+        random = NumpyRNG(7, integer_type=np.int_)
         array = random.random_int_array(0, 2, shape=(4, 4))
         number_count = 0
 
@@ -36,7 +36,7 @@ class TestNumpyRNG(unittest.TestCase):
         self.assertEqual(number_count, 16)
 
     def test_shape_three_dimensional(self):
-        random = NumpyRNG(7)
+        random = NumpyRNG(7, integer_type=np.int_)
         array = random.random_int_array(0, 2, shape=(4, 4, 4))
         number_count = 0
 
