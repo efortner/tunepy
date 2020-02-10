@@ -5,7 +5,7 @@ from tunepy.genome_builders import UniformCrossoverGenomeBuilder
 import numpy as np
 
 
-class TestGeneticAlgorithmGenomeBuilder(unittest.TestCase):
+class TestUniformCrossoverGenomeBuilder(unittest.TestCase):
     def test_incorrect_dimensions_passed_in(self):
         def fitness_func(bitstring):
             return 0.0

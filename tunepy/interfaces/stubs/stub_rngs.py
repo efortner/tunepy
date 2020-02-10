@@ -27,3 +27,19 @@ class NumpyPassThroughRandom(AbstractRandomNumberGenerator):
 
     def random(self):
         return self._constant_random
+
+
+class NumpyCustomRandom(AbstractRandomNumberGenerator):
+    """
+    Returns constructor defined values for all methods.
+    """
+
+    def __init__(self, random_float, random_integer):
+        self._float = random_float
+        self._int = random_integer
+
+    def random_int_array(self, minimum, maximum, shape):
+        return self._int * np.ones(shape=shape, dtype='int')
+
+    def random(self):
+        return self._float
