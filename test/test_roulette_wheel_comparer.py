@@ -1,5 +1,5 @@
 import unittest
-from tunepy.comparers import RouletteWheelComparer
+from tunepy.comparison import RouletteWheelComparer
 from tunepy.interfaces import AbstractRandomNumberGenerator
 from tunepy.interfaces.stubs import NumpyOnesRandom, ConstantFitnessLearner
 

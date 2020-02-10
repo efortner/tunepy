@@ -1,1 +1,1 @@
-from tunepy.comparers.roulette_wheel_comparer import RouletteWheelComparer
+from tunepy.comparison.roulette_wheel_comparer import RouletteWheelComparer
