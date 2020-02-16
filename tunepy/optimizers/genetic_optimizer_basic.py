@@ -24,6 +24,7 @@ class BasicGeneticOptimizer(AbstractOptimizer):
             new_genome.run()
             if new_genome.fitness > self._max_fitness:
                 self._best_genome = new_genome
+                self._max_fitness = self._best_genome.fitness
 
         self._converged = self._convergence_criterion(old_population, self._population)
 
