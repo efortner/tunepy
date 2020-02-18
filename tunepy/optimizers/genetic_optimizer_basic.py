@@ -1,4 +1,5 @@
 from tunepy.interfaces import AbstractOptimizer
+from tunepy.internal import Genome
 
 
 class BasicGeneticOptimizer(AbstractOptimizer):
@@ -11,7 +12,7 @@ class BasicGeneticOptimizer(AbstractOptimizer):
         self._genome_builder = genome_builder
         self._convergence_criterion = convergence_criterion
         self._max_fitness = float('-inf')
-        self._best_genome = None
+        self._best_genome = Genome(lambda bitstring: self._best_genome, [])
         self._converged = False
 
     def next(self):
@@ -19,14 +20,14 @@ class BasicGeneticOptimizer(AbstractOptimizer):
         self._population = []
 
         for index in range(len(old_population)):
-            new_genome = self._genome_builder(old_population)
+            new_genome = self._genome_builder.build(old_population)
             self._population.append(new_genome)
             new_genome.run()
             if new_genome.fitness > self._max_fitness:
                 self._best_genome = new_genome
                 self._max_fitness = self._best_genome.fitness
 
-        self._converged = self._convergence_criterion(old_population, self._population)
+        self._converged = self._convergence_criterion.converged(old_population, self._population)
 
     @property
     def converged(self):
