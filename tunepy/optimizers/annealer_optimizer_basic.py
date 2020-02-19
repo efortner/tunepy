@@ -21,7 +21,7 @@ class BasicAnnealingOptimizer(AbstractOptimizer):
 
     def next(self):
         old_candidate = self._candidate
-        new_candidate = self._genome_builder([old_candidate])
+        new_candidate = self._genome_builder.build([old_candidate])
         new_candidate.run()
 
         if new_candidate.fitness > old_candidate.fitness:
@@ -36,7 +36,7 @@ class BasicAnnealingOptimizer(AbstractOptimizer):
             self._max_fitness = self._candidate.fitness
 
         self._temperature *= self._temperature_decay
-        self._converged = self._convergence_criterion([old_candidate], [self._candidate])
+        self._converged = self._convergence_criterion.converged([old_candidate], [self._candidate])
 
     @property
     def converged(self):
