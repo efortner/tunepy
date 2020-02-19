@@ -13,6 +13,9 @@ class TestGeneticOptimizer(unittest.TestCase):
             return 1
 
         initial_population = [Genome(fitness_func_zero, [0])]
+        for genome in initial_population:
+            genome.run()
+
         convergence_criterion = PassThroughConvergenceCriterion(True)
         genome_builder = PassThroughGenomeBuilder(Genome(fitness_func_one, [1]))
         optimizer = BasicGeneticOptimizer(initial_population, genome_builder, convergence_criterion)
@@ -26,6 +29,9 @@ class TestGeneticOptimizer(unittest.TestCase):
             return 0
 
         initial_population = [Genome(fitness_func_zero, [0])]
+        for genome in initial_population:
+            genome.run()
+
         convergence_criterion = PassThroughConvergenceCriterion(True)
         genome_builder = PassThroughGenomeBuilder(Genome(fitness_func_zero, [1]))
         optimizer = BasicGeneticOptimizer(initial_population, genome_builder, convergence_criterion)

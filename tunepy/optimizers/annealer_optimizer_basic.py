@@ -7,14 +7,11 @@ class BasicAnnealingOptimizer(AbstractOptimizer):
     Performs a randomized optimization of by simulated annealing.
     """
 
-    def __init__(self, initial_candidate, genome_builder, convergence_criterion, rng,
-                 initial_temperature=1.0, temperature_decay=0.99):
+    def __init__(self, initial_candidate, genome_builder, annealing_schedule, rng):
         self._candidate = initial_candidate
         self._genome_builder = genome_builder
-        self._convergence_criterion = convergence_criterion
+        self._annealing_schedule = annealing_schedule
         self._rng = rng
-        self._temperature = initial_temperature
-        self._temperature_decay = temperature_decay
         self._max_fitness = float('-inf')
         self._best_genome = None
         self._converged = False
@@ -27,7 +24,7 @@ class BasicAnnealingOptimizer(AbstractOptimizer):
         if new_candidate.fitness > old_candidate.fitness:
             self._candidate = new_candidate
         else:
-            acceptance_probability = exp((new_candidate.fitness - old_candidate.fitness) / self._temperature)
+            acceptance_probability = exp((new_candidate.fitness - old_candidate.fitness) / self.temperature)
             if self._rng.random() < acceptance_probability:
                 self._candidate = new_candidate
 
@@ -35,8 +32,7 @@ class BasicAnnealingOptimizer(AbstractOptimizer):
             self._best_genome = self._candidate
             self._max_fitness = self._candidate.fitness
 
-        self._temperature *= self._temperature_decay
-        self._converged = self._convergence_criterion.converged([old_candidate], [self._candidate])
+        self._converged = self._annealing_schedule.converged([old_candidate], [self._candidate])
 
     @property
     def converged(self):
@@ -45,3 +41,7 @@ class BasicAnnealingOptimizer(AbstractOptimizer):
     @property
     def best_genome(self):
         return self._best_genome
+
+    @property
+    def temperature(self):
+        return self._annealing_schedule.temperature

@@ -15,3 +15,10 @@ class AbstractConvergenceCriterion(ABC):
         :return: True if converged, else, False.
         """
         pass
+
+
+class AbstractAnnealingSchedule(AbstractConvergenceCriterion):
+    @property
+    @abstractmethod
+    def temperature(self):
+        pass
