@@ -6,8 +6,10 @@ from tunepy.interfaces.stubs import *
 
 class TestCrossValidator(unittest.TestCase):
     def test_bin_creation_error(self):
+        validator = CrossValidator(1)
+
         with self.assertRaises(CrossValidatorBinException):
-            CrossValidator(1)
+            validator.validate(None, None, None)
 
     def test_data_mismatch_error(self):
         data_features = \

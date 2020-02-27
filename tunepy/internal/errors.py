@@ -4,3 +4,7 @@ class CrossValidatorBinException(Exception):
 
 class DimensionsMismatchException(Exception):
     pass
+
+
+class TrainTestSplitException(Exception):
+    pass

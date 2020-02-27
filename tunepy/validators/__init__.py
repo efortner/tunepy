@@ -1,1 +1,2 @@
 from tunepy.validators.cross_validator import CrossValidator
+from tunepy.validators.train_test_validator import TrainTestValidator

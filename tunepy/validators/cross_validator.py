@@ -15,8 +15,6 @@ class CrossValidator(AbstractValidator):
         Creates a new CrossValidator.
         :param bins: The number of bins to divide the data into. Must be at least 2.
         """
-        if bins < 2:
-            raise CrossValidatorBinException
         self._bins = bins
         self._feature_bins_train = []
         self._feature_bins_test = []
@@ -31,6 +29,9 @@ class CrossValidator(AbstractValidator):
         :param model: An untrained model of a class than implements AbstractLearner.
         :return:
         """
+        if self._bins < 2:
+            raise CrossValidatorBinException
+
         if len(x) != len(y):
             raise DimensionsMismatchException
 
