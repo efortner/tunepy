@@ -54,6 +54,9 @@ class CrossValidator(AbstractValidator):
         :param x: Array-like of features.
         :param y: Vector of labels.
         """
+        if len(x) != len(y):
+            raise DimensionsMismatchException
+
         total_rows = len(y)
         extra_rows = total_rows % self._bins
         bin_size = int((total_rows - extra_rows) / self._bins)
@@ -78,6 +81,9 @@ class CrossValidator(AbstractValidator):
         :param x: Array-like of features.
         :param y: Vector of labels.
         """
+        if len(x) != len(y):
+            raise DimensionsMismatchException
+
         total_rows = len(y)
         extra_rows = total_rows % self._bins
         bin_size = int((total_rows - extra_rows) / self._bins)

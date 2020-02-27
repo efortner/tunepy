@@ -11,6 +11,40 @@ class TestCrossValidator(unittest.TestCase):
         with self.assertRaises(CrossValidatorBinException):
             validator.validate(None, None, None)
 
+    def test_test_bins_error(self):
+        data_features = \
+            [[0, 0, 0, 0, 0],
+             [1, 1, 1, 1, 1],
+             [2, 2, 2, 2, 2],
+             [3, 3, 3, 3, 3],
+             [4, 4, 4, 4, 4],
+             [5, 5, 5, 5, 5]]
+
+        data_labels = \
+            [0, 1, 2, 3, 4]
+
+        validator = CrossValidator(5)
+
+        with self.assertRaises(DimensionsMismatchException):
+            validator.build_test_bins(data_features, data_labels)
+
+    def test_train_bins_error(self):
+        data_features = \
+            [[0, 0, 0, 0, 0],
+             [1, 1, 1, 1, 1],
+             [2, 2, 2, 2, 2],
+             [3, 3, 3, 3, 3],
+             [4, 4, 4, 4, 4],
+             [5, 5, 5, 5, 5]]
+
+        data_labels = \
+            [0, 1, 2, 3, 4]
+
+        validator = CrossValidator(5)
+
+        with self.assertRaises(DimensionsMismatchException):
+            validator.build_train_bins(data_features, data_labels)
+
     def test_data_mismatch_error(self):
         data_features = \
             [[0, 0, 0, 0, 0],
