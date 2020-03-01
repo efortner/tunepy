@@ -29,7 +29,7 @@ class TrainTestValidator(AbstractValidator):
 
         size_train = int(self._train_test_ratio * len(x))
 
-        if size_train <= 0 or size_train > len(x):
+        if size_train <= 0 or size_train >= len(x):
             raise TrainTestSplitException
 
         self._train_features = self._x[:size_train]
