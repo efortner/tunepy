@@ -1,2 +1,3 @@
 from tunepy.optimizers.genetic_optimizer_basic import BasicGeneticOptimizer
 from tunepy.optimizers.annealer_optimizer_basic import BasicAnnealingOptimizer
+from tunepy.optimizers.optimizer_basic import BasicOptimizer
