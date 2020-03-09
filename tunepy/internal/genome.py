@@ -1,4 +1,4 @@
-
+import numpy as np
 
 class Genome(object):
     """
@@ -29,3 +29,8 @@ class Genome(object):
     @property
     def fitness(self):
         return self._fitness
+
+    @staticmethod
+    def new_default_genome(dimensions, fitness_func, *args, **kwargs):
+        bitstring = np.zeros(shape=dimensions, dtype='int8')
+        return Genome(fitness_func, bitstring, *args, **kwargs)
