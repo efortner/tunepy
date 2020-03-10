@@ -1,5 +1,4 @@
 from tunepy.interfaces import AbstractOptimizer
-from copy import deepcopy
 
 
 class BasicRandomRestartOptimizer(AbstractOptimizer):
