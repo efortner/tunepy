@@ -8,7 +8,3 @@ class DimensionsMismatchException(Exception):
 
 class TrainTestSplitException(Exception):
     pass
-
-
-class FitnessFunctionUndefinedException(Exception):
-    pass
