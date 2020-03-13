@@ -1,9 +1,9 @@
-from tunepy.interfaces import AbstractGenomeBuilder
+from tunepy.interfaces import AbstractGenomeFactory
 from tunepy.internal import Genome
 from copy import deepcopy
 
 
-class RandomNeighborGenomeBuilder(AbstractGenomeBuilder):
+class RandomNeighborGenomeFactory(AbstractGenomeFactory):
     def __init__(self, dimensions, rng, fitness_func, n=1, *args, **kwargs):
         self._n = n
         self._dimensions = dimensions

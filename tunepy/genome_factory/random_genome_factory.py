@@ -1,8 +1,8 @@
 from tunepy import Genome
-from tunepy.interfaces import AbstractGenomeBuilder
+from tunepy.interfaces import AbstractGenomeFactory
 
 
-class RandomGenomeBuilder(AbstractGenomeBuilder):
+class RandomGenomeFactory(AbstractGenomeFactory):
     def __init__(self, rng, dimensions, fitness_func, *args, **kwargs):
         self._rng = rng
         self._dimensions = dimensions

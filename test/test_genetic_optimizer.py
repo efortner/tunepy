@@ -1,6 +1,6 @@
 import unittest
 from tunepy.optimizers import BasicGeneticOptimizer
-from tunepy.interfaces.stubs import PassThroughConvergenceCriterion, PassThroughGenomeBuilder
+from tunepy.interfaces.stubs import PassThroughConvergenceCriterion, PassThroughGenomeFactory
 from tunepy.internal import Genome
 
 
@@ -17,7 +17,7 @@ class TestGeneticOptimizer(unittest.TestCase):
             genome.run()
 
         convergence_criterion = PassThroughConvergenceCriterion(True)
-        genome_builder = PassThroughGenomeBuilder(Genome(fitness_func_one, [1]))
+        genome_builder = PassThroughGenomeFactory(Genome(fitness_func_one, [1]))
         optimizer = BasicGeneticOptimizer(initial_population, genome_builder, convergence_criterion)
 
         optimizer.next()
@@ -33,7 +33,7 @@ class TestGeneticOptimizer(unittest.TestCase):
             genome.run()
 
         convergence_criterion = PassThroughConvergenceCriterion(True)
-        genome_builder = PassThroughGenomeBuilder(Genome(fitness_func_zero, [1]))
+        genome_builder = PassThroughGenomeFactory(Genome(fitness_func_zero, [1]))
         optimizer = BasicGeneticOptimizer(initial_population, genome_builder, convergence_criterion)
 
         self.assertFalse(optimizer.converged)

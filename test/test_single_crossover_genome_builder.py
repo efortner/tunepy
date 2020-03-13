@@ -1,5 +1,5 @@
 import unittest
-from tunepy.genome_builders import SinglePointCrossoverGenomeBuilder
+from tunepy.genome_factory import SinglePointCrossoverGenomeFactory
 from tunepy.interfaces.stubs import IncrementalComparer, NumpyOnesRandom, NumpyPassThroughRandom, NumpyCustomRandom
 from tunepy.internal import DimensionsMismatchException, Genome
 import numpy as np
@@ -16,7 +16,7 @@ class TestSingleCrossoverGenomeBuilder(unittest.TestCase):
 
         comparer = IncrementalComparer()
         rng = NumpyOnesRandom()
-        genome_builder = SinglePointCrossoverGenomeBuilder(dimensions, rng, 0.0, comparer, fitness_func)
+        genome_builder = SinglePointCrossoverGenomeFactory(dimensions, rng, 0.0, comparer, fitness_func)
 
         with self.assertRaises(DimensionsMismatchException):
             genome_builder.build([left, right])
@@ -31,7 +31,7 @@ class TestSingleCrossoverGenomeBuilder(unittest.TestCase):
 
         comparer = IncrementalComparer()
         rng = NumpyCustomRandom(0.1, 1)
-        genome_builder = SinglePointCrossoverGenomeBuilder(dimensions, rng, 1.0, comparer, fitness_func)
+        genome_builder = SinglePointCrossoverGenomeFactory(dimensions, rng, 1.0, comparer, fitness_func)
 
         new_genome = genome_builder.build([left, right])
 
@@ -47,7 +47,7 @@ class TestSingleCrossoverGenomeBuilder(unittest.TestCase):
 
         comparer = IncrementalComparer()
         rng = NumpyPassThroughRandom(3)
-        genome_builder = SinglePointCrossoverGenomeBuilder(dimensions, rng, 0.0, comparer, fitness_func)
+        genome_builder = SinglePointCrossoverGenomeFactory(dimensions, rng, 0.0, comparer, fitness_func)
 
         expected = np.ones((2, 6))
         expected[:, 3:] = 3

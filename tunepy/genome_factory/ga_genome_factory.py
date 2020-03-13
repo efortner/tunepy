@@ -1,8 +1,8 @@
-from tunepy.interfaces import AbstractGenomeBuilder
+from tunepy.interfaces import AbstractGenomeFactory
 from tunepy.internal import Genome, DimensionsMismatchException
 
 
-class UniformCrossoverGenomeBuilder(AbstractGenomeBuilder):
+class UniformCrossoverGenomeFactory(AbstractGenomeFactory):
     def __init__(self, dimensions, rng, mutation_rate, comparer, fitness_func, *args, **kwargs):
         self._dimensions = dimensions
         self._rng = rng
@@ -41,7 +41,7 @@ class UniformCrossoverGenomeBuilder(AbstractGenomeBuilder):
 
         return Genome(self._fitness_func, new_bitstring, *self._args, **self._kwargs)
 
-class SinglePointCrossoverGenomeBuilder(AbstractGenomeBuilder):
+class SinglePointCrossoverGenomeFactory(AbstractGenomeFactory):
     def __init__(self, dimensions, rng, mutation_rate, comparer, fitness_func, *args, **kwargs):
         self._dimensions = dimensions
         self._rng = rng

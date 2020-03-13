@@ -1,8 +1,8 @@
-from tunepy.interfaces import AbstractGenomeBuilder
+from tunepy.interfaces import AbstractGenomeFactory
 from copy import deepcopy
 
 
-class PassThroughGenomeBuilder(AbstractGenomeBuilder):
+class PassThroughGenomeFactory(AbstractGenomeFactory):
     def __init__(self, returned_genome):
         self._genome = returned_genome
 

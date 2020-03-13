@@ -1,9 +1,9 @@
-from tunepy.interfaces import AbstractGenomeBuilder
+from tunepy.interfaces import AbstractGenomeFactory
 from tunepy.internal import Genome
 import numpy as np
 
 
-class HillClimberGenomeBuilder(AbstractGenomeBuilder):
+class HillClimberGenomeFactory(AbstractGenomeFactory):
     def __init__(self, dimensions, rng, fitness_func, *args, **kwargs):
         self._dimensions = dimensions
         self._rng = rng

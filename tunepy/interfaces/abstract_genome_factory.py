@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class AbstractGenomeBuilder(ABC):
+class AbstractGenomeFactory(ABC):
     """
     Builds Genome objects.
     """

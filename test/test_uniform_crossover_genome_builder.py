@@ -1,7 +1,7 @@
 import unittest
 from tunepy.interfaces.stubs import IncrementalComparer, NumpyOnesRandom, NumpyPassThroughRandom
 from tunepy.internal import DimensionsMismatchException, Genome
-from tunepy.genome_builders import UniformCrossoverGenomeBuilder
+from tunepy.genome_factory import UniformCrossoverGenomeFactory
 import numpy as np
 
 
@@ -16,7 +16,7 @@ class TestUniformCrossoverGenomeBuilder(unittest.TestCase):
 
         comparer = IncrementalComparer()
         rng = NumpyOnesRandom()
-        genome_builder = UniformCrossoverGenomeBuilder(dimensions, rng, 0.0, comparer, fitness_func)
+        genome_builder = UniformCrossoverGenomeFactory(dimensions, rng, 0.0, comparer, fitness_func)
 
         with self.assertRaises(DimensionsMismatchException):
             genome_builder.build([left, right])
@@ -31,7 +31,7 @@ class TestUniformCrossoverGenomeBuilder(unittest.TestCase):
 
         comparer = IncrementalComparer()
         rng = NumpyOnesRandom()
-        genome_builder = UniformCrossoverGenomeBuilder(dimensions, rng, 1.0, comparer, fitness_func)
+        genome_builder = UniformCrossoverGenomeFactory(dimensions, rng, 1.0, comparer, fitness_func)
 
         new_genome = genome_builder.build([left, right])
 
@@ -47,7 +47,7 @@ class TestUniformCrossoverGenomeBuilder(unittest.TestCase):
 
         comparer = IncrementalComparer()
         rng = NumpyPassThroughRandom(0.2)
-        genome_builder = UniformCrossoverGenomeBuilder(dimensions, rng, 0.0, comparer, fitness_func)
+        genome_builder = UniformCrossoverGenomeFactory(dimensions, rng, 0.0, comparer, fitness_func)
 
         new_genome = genome_builder.build([left, right])
 
@@ -63,7 +63,7 @@ class TestUniformCrossoverGenomeBuilder(unittest.TestCase):
 
         comparer = IncrementalComparer()
         rng = NumpyPassThroughRandom(0.8)
-        genome_builder = UniformCrossoverGenomeBuilder(dimensions, rng, 0.0, comparer, fitness_func)
+        genome_builder = UniformCrossoverGenomeFactory(dimensions, rng, 0.0, comparer, fitness_func)
 
         new_genome = genome_builder.build([left, right])
 

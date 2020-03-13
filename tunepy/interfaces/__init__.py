@@ -4,6 +4,6 @@ from tunepy.interfaces.abstract_optimizer import AbstractOptimizer
 from tunepy.interfaces.abstract_rng import AbstractRandomNumberGenerator
 from tunepy.interfaces.abstract_model_builder import AbstractModelBuilder
 from tunepy.interfaces.abstract_validator import AbstractValidator
-from tunepy.interfaces.abstract_genome_builder import AbstractGenomeBuilder
+from tunepy.interfaces.abstract_genome_factory import AbstractGenomeFactory
 from tunepy.interfaces.abstract_convergence_criterion import AbstractConvergenceCriterion, AbstractAnnealingSchedule
 from tunepy.interfaces.abstract_optimizer_builder import AbstractOptimizerBuilder
