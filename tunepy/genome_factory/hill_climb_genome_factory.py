@@ -31,3 +31,7 @@ class HillClimberGenomeFactory(AbstractGenomeFactory):
         self._bit_index += 1
 
         return Genome(self._fitness_func, new_bitstring, *self._args, **self._kwargs)
+
+    @property
+    def dimensions(self):
+        return self._dimensions

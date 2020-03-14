@@ -14,3 +14,9 @@ class AbstractGenomeFactory(ABC):
         :return: A new Genome object.
         """
         pass
+
+    @property
+    @abstractmethod
+    def dimensions(self):
+        pass
+

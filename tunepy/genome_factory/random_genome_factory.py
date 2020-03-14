@@ -13,3 +13,7 @@ class RandomGenomeFactory(AbstractGenomeFactory):
     def build(self, prior_genomes):
         bitstring = self._rng.random_int_array(0, 1, self._dimensions)
         return Genome(self._fitness_func, bitstring, *self._args, **self._kwargs)
+
+    @property
+    def dimensions(self):
+        return self._dimensions

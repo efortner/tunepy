@@ -33,3 +33,7 @@ class RandomNeighborGenomeFactory(AbstractGenomeFactory):
             recursive_bit_flip(candidate_genome_bitstring, self._dimensions)
 
         return Genome(self._fitness_func, candidate_genome_bitstring, *self._args, **self._kwargs)
+
+    @property
+    def dimensions(self):
+        return self._dimensions

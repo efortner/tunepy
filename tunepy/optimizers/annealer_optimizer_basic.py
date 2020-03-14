@@ -7,9 +7,9 @@ class BasicAnnealingOptimizer(AbstractOptimizer):
     Performs a randomized optimization of by simulated annealing.
     """
 
-    def __init__(self, initial_candidate, genome_builder, annealing_schedule, rng):
+    def __init__(self, initial_candidate, genome_factory, annealing_schedule, rng):
         self._candidate = initial_candidate
-        self._genome_builder = genome_builder
+        self._genome_factory = genome_factory
         self._annealing_schedule = annealing_schedule
         self._rng = rng
         self._max_fitness = float('-inf')
@@ -18,7 +18,7 @@ class BasicAnnealingOptimizer(AbstractOptimizer):
 
     def next(self):
         old_candidate = self._candidate
-        new_candidate = self._genome_builder.build([old_candidate])
+        new_candidate = self._genome_factory.build([old_candidate])
         new_candidate.run()
 
         if new_candidate.fitness > old_candidate.fitness:

@@ -41,6 +41,10 @@ class UniformCrossoverGenomeFactory(AbstractGenomeFactory):
 
         return Genome(self._fitness_func, new_bitstring, *self._args, **self._kwargs)
 
+    @property
+    def dimensions(self):
+        return self._dimensions
+
 class SinglePointCrossoverGenomeFactory(AbstractGenomeFactory):
     def __init__(self, dimensions, rng, mutation_rate, comparer, fitness_func, *args, **kwargs):
         self._dimensions = dimensions
@@ -80,3 +84,7 @@ class SinglePointCrossoverGenomeFactory(AbstractGenomeFactory):
         recursive_gene_selection(self._dimensions, new_bitstring, left_prior, right_prior)
 
         return Genome(self._fitness_func, new_bitstring, *self._args, **self._kwargs)
+
+    @property
+    def dimensions(self):
+        return self._dimensions

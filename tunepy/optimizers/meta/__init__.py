@@ -1,1 +1,1 @@
-from tunepy.optimizers.meta.random_restart_optimizer import BasicRandomRestartOptimizer
+from tunepy.optimizers.meta.basic_restart_optimizer import BasicRestartOptimizer
