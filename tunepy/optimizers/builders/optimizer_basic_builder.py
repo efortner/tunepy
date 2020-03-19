@@ -18,9 +18,7 @@ class BasicOptimizerBuilder(AbstractOptimizerBuilder):
                                                 self._fitness_func,
                                                 *self._args,
                                                 **self._kwargs)
-        self._population.append(
-            [genome_factory.build([base_genome]) for _ in range(n)]
-        )
+        self._population += [genome_factory.build([base_genome]) for _ in range(n)]
         return self
 
     def add_to_initial_population(self, genome):

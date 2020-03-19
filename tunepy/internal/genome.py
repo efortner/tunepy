@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class Genome(object):
     """
     Represents a single genome.
