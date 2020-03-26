@@ -4,7 +4,7 @@ from tunepy.optimizers import BasicOptimizer
 from tunepy.optimizers.builders import BasicOptimizerBuilder
 from tunepy.interfaces.stubs import PassThroughConvergenceCriterion
 from tunepy.interfaces.stubs import PassThroughGenomeFactory
-from tunepy import Genome
+from tunepy import Genome, InitialPopulationUndefinedException
 
 
 class TestOptimizerBasicBuilder(unittest.TestCase):
@@ -71,6 +71,18 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
         self.assertAlmostEqual(optimizer.best_genome.fitness, 69.0)
         self.assertEqual(spy_fitness_function_holder.fitness_func_executions, 1)
         self.assertIsInstance(optimizer, BasicOptimizer)
+
+    def test_build_raises_exception_with_no_population(self):
+        def fitness_func(bitstring):
+            self.fail()
+
+        genome_factory = PassThroughGenomeFactory(
+            Genome.new_default_genome((5,), fitness_func))
+        convergence_criterion = PassThroughConvergenceCriterion(True)
+        optimizer_builder = BasicOptimizerBuilder((5,), fitness_func, genome_factory, convergence_criterion)
+
+        with self.assertRaises(InitialPopulationUndefinedException):
+            optimizer_builder.build()
 
 
 if __name__ == '__main__':
