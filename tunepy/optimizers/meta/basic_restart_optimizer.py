@@ -16,7 +16,7 @@ class BasicRestartOptimizer(AbstractOptimizer):
             .add_to_initial_population_from_factory(self._genome_factory, self._population_size) \
             .build()
 
-        while not new_optimizer.converged():
+        while not new_optimizer.converged:
             new_optimizer.next()
 
         self._converged = self._convergence_criterion.converged([self.best_genome], [new_optimizer.best_genome])
