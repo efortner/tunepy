@@ -1,8 +1,8 @@
-from tunepy.interfaces import AbstractModelBuilder
+from tunepy.interfaces import AbstractModelFactory
 from tunepy.interfaces.stubs import ConstantFitnessLearner
 
 
-class ConstantFitnessLearnerBuilder(AbstractModelBuilder):
+class ConstantFitnessLearnerFactory(AbstractModelFactory):
     """
     Builds ConstantFitnessLearners.
     """

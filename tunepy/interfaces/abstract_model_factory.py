@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class AbstractModelBuilder(ABC):
+class AbstractModelFactory(ABC):
     """
     The common interface for that tunepy expects from all model builders.
     """
