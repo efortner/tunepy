@@ -15,7 +15,7 @@ class BasicOptimizer(AbstractOptimizer):
         if new_candidate.fitness > old_candidate.fitness:
             self._candidate = new_candidate
 
-        self._converged = self._convergence_criterion.converged([old_candidate], [new_candidate])
+        self._converged = self._convergence_criterion.converged(old_candidate, new_candidate)
 
     @property
     def converged(self):

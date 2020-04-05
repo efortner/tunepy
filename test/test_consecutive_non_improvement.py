@@ -17,7 +17,7 @@ class TestConsecutiveNonImprovement(unittest.TestCase):
         old_genome = FakeGenome(-1)
         for index in range(20):
             new_genome = FakeGenome(index)
-            self.assertFalse(convergence.converged([old_genome], [new_genome]))
+            self.assertFalse(convergence.converged(old_genome, new_genome))
             old_genome = new_genome
 
     def test_convergence(self):
@@ -33,8 +33,8 @@ class TestConsecutiveNonImprovement(unittest.TestCase):
 
         old_genome = FakeGenome(-1)
         for index in range(4):
-            self.assertFalse(convergence.converged([old_genome], [old_genome]))
-        self.assertTrue(convergence.converged([old_genome], [old_genome]))
+            self.assertFalse(convergence.converged(old_genome, old_genome))
+        self.assertTrue(convergence.converged(old_genome, old_genome))
 
 
 if __name__ == '__main__':

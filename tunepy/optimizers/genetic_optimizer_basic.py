@@ -1,5 +1,5 @@
 from tunepy.interfaces import AbstractOptimizer
-from tunepy.internal import Genome
+from tunepy import get_best_genome
 
 
 class BasicGeneticOptimizer(AbstractOptimizer):
@@ -12,11 +12,12 @@ class BasicGeneticOptimizer(AbstractOptimizer):
         self._genome_factory = genome_factory
         self._convergence_criterion = convergence_criterion
         self._max_fitness = float('-inf')
-        self._best_genome = Genome(lambda bitstring: self._best_genome, [])
+        self._best_genome = None
         self._converged = False
 
     def next(self):
         old_population = self._population
+
         self._population = []
 
         for index in range(len(old_population)):
@@ -27,7 +28,7 @@ class BasicGeneticOptimizer(AbstractOptimizer):
                 self._best_genome = new_genome
                 self._max_fitness = self._best_genome.fitness
 
-        self._converged = self._convergence_criterion.converged(old_population, self._population)
+        self._converged = self._convergence_criterion.converged(get_best_genome(old_population), self.best_genome)
 
     @property
     def converged(self):
@@ -35,4 +36,6 @@ class BasicGeneticOptimizer(AbstractOptimizer):
 
     @property
     def best_genome(self):
+        if self._best_genome is None:
+            self._best_genome = get_best_genome(self._population)
         return self._best_genome

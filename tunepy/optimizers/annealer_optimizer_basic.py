@@ -32,7 +32,7 @@ class BasicAnnealingOptimizer(AbstractOptimizer):
             self._best_genome = self._candidate
             self._max_fitness = self._candidate.fitness
 
-        self._converged = self._annealing_schedule.converged([old_candidate], [self._candidate])
+        self._converged = self._annealing_schedule.converged(old_candidate, self._candidate)
 
     @property
     def converged(self):

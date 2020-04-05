@@ -15,7 +15,7 @@ class Iterations(AbstractConvergenceCriterion):
         self._n = n
         self._current_iteration = 1
 
-    def converged(self, old_population, new_population):
+    def converged(self, old_candidate, new_candidate):
         if self._current_iteration >= self._n:
             return True
 
@@ -30,12 +30,12 @@ class ConsecutiveNonImprovement(AbstractConvergenceCriterion):
         self._epsilon = epsilon
         self._net_improvement = 0.0
 
-    def converged(self, old_population, new_population):
+    def converged(self, old_candidate, new_candidate):
         if self._net_improvement < self._epsilon and self._iteration_count == self._last_iteration:
             return True
 
-        old_fitness = get_best_fitness(old_population)
-        new_fitness = get_best_fitness(new_population)
+        old_fitness = old_candidate.fitness
+        new_fitness = new_candidate.fitness
 
         if self._iteration_count == 0:
             self._net_improvement = new_fitness - old_fitness
@@ -48,11 +48,3 @@ class ConsecutiveNonImprovement(AbstractConvergenceCriterion):
             self._iteration_count = 0
 
         return False
-
-
-def get_best_fitness(population):
-    best_fitness = float('-inf')
-    for genome in population:
-        if genome.fitness > best_fitness:
-            best_fitness = genome.fitness
-    return best_fitness

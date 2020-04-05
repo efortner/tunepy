@@ -19,7 +19,7 @@ class BasicRestartOptimizer(AbstractOptimizer):
         while not new_optimizer.converged:
             new_optimizer.next()
 
-        self._converged = self._convergence_criterion.converged([self.best_genome], [new_optimizer.best_genome])
+        self._converged = self._convergence_criterion.converged(self.best_genome, new_optimizer.best_genome)
 
         if new_optimizer.best_genome.fitness > self._max_fitness:
             self._max_fitness = new_optimizer.best_genome.fitness
