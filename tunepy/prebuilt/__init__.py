@@ -1,1 +1,1 @@
-from tunepy.prebuilt.optimizers import RandomRestartHillClimber
+from tunepy.prebuilt.prebuilt_optimizers import new_random_restart_hill_climber
