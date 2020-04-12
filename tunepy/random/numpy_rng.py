@@ -7,7 +7,7 @@ class NumpyRNG(AbstractRandomNumberGenerator):
     A tunepy wrapper for the number random number generator.
     """
 
-    def __init__(self, seed=None, integer_type='int8'):
+    def __init__(self, seed=None, integer_type='int32'):
         """
         Creates a new numpy-based random number generator.
         :param seed: Seed that will be passed into numpy (this is global to numpy).

@@ -4,7 +4,7 @@ from copy import deepcopy
 
 
 class RandomNeighborGenomeFactory(AbstractGenomeFactory):
-    def __init__(self, dimensions, rng, fitness_func, n=1, *args, **kwargs):
+    def __init__(self, dimensions, rng, n, fitness_func, *args, **kwargs):
         self._n = n
         self._dimensions = dimensions
         self._rng = rng

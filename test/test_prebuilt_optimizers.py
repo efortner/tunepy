@@ -1,7 +1,7 @@
 import unittest
-from tunepy import new_random_restart_hill_climber, new_simulated_annealer
+from tunepy import new_random_restart_hill_climber, new_simulated_annealer, new_hill_climber, new_genetic_optimizer
 from tunepy.optimizers.meta import BasicRestartOptimizer
-from tunepy.optimizers import BasicAnnealingOptimizer
+from tunepy.optimizers import BasicAnnealingOptimizer, BasicOptimizer, BasicGeneticOptimizer
 
 
 class TestPrebuiltOptimizers(unittest.TestCase):
@@ -41,6 +41,48 @@ class TestPrebuiltOptimizers(unittest.TestCase):
         self.assertFalse(optimizer.converged)
 
         for _ in range(2):
+            optimizer.next()
+            self.assertFalse(optimizer.converged)
+            self.assertAlmostEqual(optimizer.best_genome.fitness, 69.0)
+
+        optimizer.next()
+        self.assertTrue(optimizer.converged)
+
+    def test_creates_hill_climber(self):
+        def fitness_func(bitstring):
+            return 69.0
+
+        optimizer = new_hill_climber((5,),
+                                     10,
+                                     1e-5,
+                                     fitness_func)
+
+        self.assertIsInstance(optimizer, BasicOptimizer)
+        self.assertFalse(optimizer.converged)
+
+        for _ in range(9):
+            optimizer.next()
+            self.assertFalse(optimizer.converged)
+            self.assertAlmostEqual(optimizer.best_genome.fitness, 69.0)
+
+        optimizer.next()
+        self.assertTrue(optimizer.converged)
+
+    def test_creates_genetic_optimizer(self):
+        def fitness_func(bitstring):
+            return 69.0
+
+        optimizer = new_genetic_optimizer((5,),
+                                          100,
+                                          0.2,
+                                          10,
+                                          1e-5,
+                                          fitness_func)
+
+        self.assertIsInstance(optimizer, BasicGeneticOptimizer)
+        self.assertFalse(optimizer.converged)
+
+        for _ in range(9):
             optimizer.next()
             self.assertFalse(optimizer.converged)
             self.assertAlmostEqual(optimizer.best_genome.fitness, 69.0)

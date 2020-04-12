@@ -3,7 +3,7 @@ from tunepy.interfaces import AbstractGenomeFactory
 
 
 class RandomGenomeFactory(AbstractGenomeFactory):
-    def __init__(self, rng, dimensions, fitness_func, *args, **kwargs):
+    def __init__(self, dimensions, rng, fitness_func, *args, **kwargs):
         self._rng = rng
         self._dimensions = dimensions
         self._fitness_func = fitness_func
