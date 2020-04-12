@@ -20,9 +20,9 @@ class TestOptimizerBasicRestart(unittest.TestCase):
         convergence_criterion = PassThroughConvergenceCriterion(True)
         optimizer_builder = BasicOptimizerBuilder(
             (5,),
-            fitness_func,
             new_population_genome_factory,
-            convergence_criterion
+            convergence_criterion,
+            fitness_func
         )
 
         meta_optimizer = BasicRestartOptimizer(

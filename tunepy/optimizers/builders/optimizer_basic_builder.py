@@ -4,7 +4,7 @@ from tunepy.optimizers import BasicOptimizer
 
 
 class BasicOptimizerBuilder(AbstractOptimizerBuilder):
-    def __init__(self, dimensions, fitness_func, new_candidate_genome_factory, convergence_criterion, *args, **kwargs):
+    def __init__(self, dimensions, new_candidate_genome_factory, convergence_criterion, fitness_func,  *args, **kwargs):
         self._dimensions = dimensions
         self._fitness_func = fitness_func
         self._new_candidate_genome_factory = new_candidate_genome_factory
