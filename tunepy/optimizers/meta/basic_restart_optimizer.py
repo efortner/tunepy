@@ -12,8 +12,9 @@ class BasicRestartOptimizer(AbstractOptimizer):
         self._best_genome = None
 
     def next(self):
-        new_optimizer = self._optimizer_builder \
-            .add_to_initial_population_from_factory(self._genome_factory, self._population_size) \
+        new_optimizer = self._optimizer_builder\
+            .new_population()\
+            .add_to_initial_population_from_factory(self._genome_factory, self._population_size)\
             .build()
 
         while not new_optimizer.converged:

@@ -14,3 +14,7 @@ class AbstractOptimizerBuilder(ABC):
     @abstractmethod
     def build(self):
         pass
+
+    @abstractmethod
+    def new_population(self):
+        pass

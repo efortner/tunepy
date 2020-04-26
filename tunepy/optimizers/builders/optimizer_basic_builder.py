@@ -36,6 +36,8 @@ class BasicOptimizerBuilder(AbstractOptimizerBuilder):
                                        self._new_candidate_genome_factory,
                                        self._convergence_criterion)
 
-        self._population = []
-
         return new_optimizer
+
+    def new_population(self):
+        self._population = []
+        return self

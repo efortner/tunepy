@@ -84,6 +84,36 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
         with self.assertRaises(InitialPopulationUndefinedException):
             optimizer_builder.build()
 
+    def test_multiple_population_add(self):
+        class SpyFitnessFunc:
+            def __init__(self):
+                self.fitness_func_executions = 0
+
+            def fitness_func(self, bitstring):
+                self.fitness_func_executions += 1
+                return 69.0
+
+        unused_spy_fitness_function_holder = SpyFitnessFunc()
+        genome_factory = PassThroughGenomeFactory(
+            Genome.new_default_genome((5,), unused_spy_fitness_function_holder.fitness_func))
+        convergence_criterion = PassThroughConvergenceCriterion(True)
+        optimizer_builder = BasicOptimizerBuilder((5,), unused_spy_fitness_function_holder.fitness_func, genome_factory,
+                                                  convergence_criterion)
+
+        spy_fitness_function_holder = SpyFitnessFunc()
+        population_genome = Genome(spy_fitness_function_holder.fitness_func, [0, 0, 0, 0, 0])
+
+        optimizer = optimizer_builder \
+            .add_to_initial_population(population_genome) \
+            .build()
+
+        self.assertAlmostEqual(optimizer.best_genome.fitness, 69.0)
+        self.assertEqual(spy_fitness_function_holder.fitness_func_executions, 1)
+        self.assertIsInstance(optimizer, BasicOptimizer)
+
+        with self.assertRaises(InitialPopulationUndefinedException):
+            optimizer_builder.new_population().build()
+
 
 if __name__ == '__main__':
     unittest.main()
