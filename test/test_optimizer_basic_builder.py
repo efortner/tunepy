@@ -4,6 +4,7 @@ from tunepy.optimizers import BasicOptimizer
 from tunepy.optimizers.builders import BasicOptimizerBuilder
 from tunepy.interfaces.stubs import PassThroughConvergenceCriterion
 from tunepy.interfaces.stubs import PassThroughGenomeFactory
+from tunepy.random import NumpyRNG
 from tunepy import Genome, InitialPopulationUndefinedException
 
 
@@ -14,7 +15,11 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
 
         genome_factory = PassThroughGenomeFactory(Genome.new_default_genome((5,), fitness_func))
         convergence_criterion = PassThroughConvergenceCriterion(True)
-        optimizer_builder = BasicOptimizerBuilder((5,), fitness_func, genome_factory, convergence_criterion)
+        optimizer_builder = BasicOptimizerBuilder((5,),
+                                                  NumpyRNG(),
+                                                  genome_factory,
+                                                  convergence_criterion,
+                                                  fitness_func)
 
         returned_object = optimizer_builder.add_to_initial_population_from_factory(genome_factory, 1)
         self.assertIs(optimizer_builder, returned_object)
@@ -25,7 +30,11 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
 
         genome_factory = PassThroughGenomeFactory(Genome.new_default_genome((5,), fitness_func))
         convergence_criterion = PassThroughConvergenceCriterion(True)
-        optimizer_builder = BasicOptimizerBuilder((5,), fitness_func, genome_factory, convergence_criterion)
+        optimizer_builder = BasicOptimizerBuilder((5,),
+                                                  NumpyRNG(),
+                                                  genome_factory,
+                                                  convergence_criterion,
+                                                  fitness_func)
 
         returned_object = optimizer_builder.add_to_initial_population(Genome.new_default_genome((5,), fitness_func))
         self.assertIs(optimizer_builder, returned_object)
@@ -36,7 +45,11 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
 
         genome_factory = PassThroughGenomeFactory(Genome.new_default_genome((5,), fitness_func))
         convergence_criterion = PassThroughConvergenceCriterion(True)
-        optimizer_builder = BasicOptimizerBuilder((5,), fitness_func, genome_factory, convergence_criterion)
+        optimizer_builder = BasicOptimizerBuilder((5,),
+                                                  NumpyRNG(),
+                                                  genome_factory,
+                                                  convergence_criterion,
+                                                  fitness_func)
 
         optimizer = optimizer_builder \
             .add_to_initial_population_from_factory(genome_factory, 1) \
@@ -58,8 +71,11 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
         genome_factory = PassThroughGenomeFactory(
             Genome.new_default_genome((5,), unused_spy_fitness_function_holder.fitness_func))
         convergence_criterion = PassThroughConvergenceCriterion(True)
-        optimizer_builder = BasicOptimizerBuilder((5,), unused_spy_fitness_function_holder.fitness_func, genome_factory,
-                                                  convergence_criterion)
+        optimizer_builder = BasicOptimizerBuilder((5,),
+                                                  NumpyRNG(),
+                                                  genome_factory,
+                                                  convergence_criterion,
+                                                  unused_spy_fitness_function_holder.fitness_func)
 
         spy_fitness_function_holder = SpyFitnessFunc()
         population_genome = Genome(spy_fitness_function_holder.fitness_func, [0, 0, 0, 0, 0])
@@ -79,7 +95,11 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
         genome_factory = PassThroughGenomeFactory(
             Genome.new_default_genome((5,), fitness_func))
         convergence_criterion = PassThroughConvergenceCriterion(True)
-        optimizer_builder = BasicOptimizerBuilder((5,), fitness_func, genome_factory, convergence_criterion)
+        optimizer_builder = BasicOptimizerBuilder((5,),
+                                                  NumpyRNG(),
+                                                  genome_factory,
+                                                  convergence_criterion,
+                                                  fitness_func)
 
         with self.assertRaises(InitialPopulationUndefinedException):
             optimizer_builder.build()
@@ -97,8 +117,11 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
         genome_factory = PassThroughGenomeFactory(
             Genome.new_default_genome((5,), unused_spy_fitness_function_holder.fitness_func))
         convergence_criterion = PassThroughConvergenceCriterion(True)
-        optimizer_builder = BasicOptimizerBuilder((5,), unused_spy_fitness_function_holder.fitness_func, genome_factory,
-                                                  convergence_criterion)
+        optimizer_builder = BasicOptimizerBuilder((5,),
+                                                  NumpyRNG(),
+                                                  genome_factory,
+                                                  convergence_criterion,
+                                                  unused_spy_fitness_function_holder.fitness_func)
 
         spy_fitness_function_holder = SpyFitnessFunc()
         population_genome = Genome(spy_fitness_function_holder.fitness_func, [0, 0, 0, 0, 0])

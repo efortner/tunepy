@@ -37,6 +37,7 @@ def new_random_restart_hill_climber(dimensions,
     single_optimizer_convergence = ConsecutiveNonImprovement(convergence_iterations, epsilon)
 
     optimizer_builder = BasicOptimizerBuilder(dimensions,
+                                              random,
                                               neighbor_genome_factory,
                                               single_optimizer_convergence,
                                               fitness_func,

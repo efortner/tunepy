@@ -3,6 +3,7 @@ import unittest
 from tunepy.optimizers.meta import BasicRestartOptimizer
 from tunepy.optimizers.builders import BasicOptimizerBuilder
 from tunepy.interfaces.stubs import PassThroughGenomeFactory, PassThroughConvergenceCriterion
+from tunepy.random import NumpyRNG
 from tunepy import Genome
 
 
@@ -20,6 +21,7 @@ class TestOptimizerBasicRestart(unittest.TestCase):
         convergence_criterion = PassThroughConvergenceCriterion(True)
         optimizer_builder = BasicOptimizerBuilder(
             (5,),
+            NumpyRNG(),
             new_population_genome_factory,
             convergence_criterion,
             fitness_func

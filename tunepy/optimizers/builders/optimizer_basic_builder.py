@@ -4,8 +4,16 @@ from tunepy.optimizers import BasicOptimizer
 
 
 class BasicOptimizerBuilder(AbstractOptimizerBuilder):
-    def __init__(self, dimensions, new_candidate_genome_factory, convergence_criterion, fitness_func,  *args, **kwargs):
+    def __init__(self,
+                 dimensions,
+                 rng,
+                 new_candidate_genome_factory,
+                 convergence_criterion,
+                 fitness_func,
+                 *args,
+                 **kwargs):
         self._dimensions = dimensions
+        self._rng = rng
         self._fitness_func = fitness_func
         self._new_candidate_genome_factory = new_candidate_genome_factory
         self._convergence_criterion = convergence_criterion
@@ -32,7 +40,9 @@ class BasicOptimizerBuilder(AbstractOptimizerBuilder):
         if len(self._population) < 1:
             raise InitialPopulationUndefinedException
 
-        new_optimizer = BasicOptimizer(self._population[0],
+        initial_candidate = self._population[self._rng.random_int(0, len(self._population))]
+
+        new_optimizer = BasicOptimizer(initial_candidate,
                                        self._new_candidate_genome_factory,
                                        self._convergence_criterion)
 
