@@ -1,8 +1,8 @@
 import unittest
 
-from tunepy.optimizers import BasicOptimizer
-from tunepy.optimizers.builders import BasicOptimizerBuilder
-from tunepy.interfaces.stubs import PassThroughConvergenceCriterion
+from tunepy.optimizers import BasicAnnealingOptimizer
+from tunepy.optimizers.builders import BasicAnnealerOptimizerBuilder
+from tunepy.interfaces.stubs import PassThroughAnnealingSchedule
 from tunepy.interfaces.stubs import PassThroughGenomeFactory
 from tunepy.random import NumpyRNG
 from tunepy import Genome, InitialPopulationUndefinedException
@@ -14,12 +14,12 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
             self.fail()
 
         genome_factory = PassThroughGenomeFactory(Genome.new_default_genome((5,), fitness_func))
-        convergence_criterion = PassThroughConvergenceCriterion(True)
-        optimizer_builder = BasicOptimizerBuilder((5,),
-                                                  NumpyRNG(),
-                                                  genome_factory,
-                                                  convergence_criterion,
-                                                  fitness_func)
+        annealing_schedule = PassThroughAnnealingSchedule(0, True)
+        optimizer_builder = BasicAnnealerOptimizerBuilder((5,),
+                                                          NumpyRNG(),
+                                                          genome_factory,
+                                                          annealing_schedule,
+                                                          fitness_func)
 
         returned_object = optimizer_builder.add_to_initial_population_from_factory(genome_factory, 1)
         self.assertEqual(optimizer_builder, returned_object)
@@ -29,12 +29,12 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
             self.fail()
 
         genome_factory = PassThroughGenomeFactory(Genome.new_default_genome((5,), fitness_func))
-        convergence_criterion = PassThroughConvergenceCriterion(True)
-        optimizer_builder = BasicOptimizerBuilder((5,),
-                                                  NumpyRNG(),
-                                                  genome_factory,
-                                                  convergence_criterion,
-                                                  fitness_func)
+        annealing_schedule = PassThroughAnnealingSchedule(0, True)
+        optimizer_builder = BasicAnnealerOptimizerBuilder((5,),
+                                                          NumpyRNG(),
+                                                          genome_factory,
+                                                          annealing_schedule,
+                                                          fitness_func)
 
         returned_object = optimizer_builder.add_to_initial_population(Genome.new_default_genome((5,), fitness_func))
         self.assertEqual(optimizer_builder, returned_object)
@@ -44,19 +44,19 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
             return 69.0
 
         genome_factory = PassThroughGenomeFactory(Genome.new_default_genome((5,), fitness_func))
-        convergence_criterion = PassThroughConvergenceCriterion(True)
-        optimizer_builder = BasicOptimizerBuilder((5,),
-                                                  NumpyRNG(),
-                                                  genome_factory,
-                                                  convergence_criterion,
-                                                  fitness_func)
+        annealing_schedule = PassThroughAnnealingSchedule(0, True)
+        optimizer_builder = BasicAnnealerOptimizerBuilder((5,),
+                                                          NumpyRNG(),
+                                                          genome_factory,
+                                                          annealing_schedule,
+                                                          fitness_func)
 
         optimizer = optimizer_builder \
             .add_to_initial_population_from_factory(genome_factory, 1) \
             .build()
 
         self.assertAlmostEqual(optimizer.best_genome.fitness, 69.0)
-        self.assertIsInstance(optimizer, BasicOptimizer)
+        self.assertIsInstance(optimizer, BasicAnnealingOptimizer)
 
     def test_add_to_initial_population_successful(self):
         class SpyFitnessFunc:
@@ -70,12 +70,12 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
         unused_spy_fitness_function_holder = SpyFitnessFunc()
         genome_factory = PassThroughGenomeFactory(
             Genome.new_default_genome((5,), unused_spy_fitness_function_holder.fitness_func))
-        convergence_criterion = PassThroughConvergenceCriterion(True)
-        optimizer_builder = BasicOptimizerBuilder((5,),
-                                                  NumpyRNG(),
-                                                  genome_factory,
-                                                  convergence_criterion,
-                                                  unused_spy_fitness_function_holder.fitness_func)
+        annealing_schedule = PassThroughAnnealingSchedule(0, True)
+        optimizer_builder = BasicAnnealerOptimizerBuilder((5,),
+                                                          NumpyRNG(),
+                                                          genome_factory,
+                                                          annealing_schedule,
+                                                          unused_spy_fitness_function_holder.fitness_func)
 
         spy_fitness_function_holder = SpyFitnessFunc()
         population_genome = Genome(spy_fitness_function_holder.fitness_func, [0, 0, 0, 0, 0])
@@ -86,7 +86,7 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
 
         self.assertAlmostEqual(optimizer.best_genome.fitness, 69.0)
         self.assertEqual(spy_fitness_function_holder.fitness_func_executions, 1)
-        self.assertIsInstance(optimizer, BasicOptimizer)
+        self.assertIsInstance(optimizer, BasicAnnealingOptimizer)
 
     def test_build_raises_exception_with_no_population(self):
         def fitness_func(bitstring):
@@ -94,12 +94,12 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
 
         genome_factory = PassThroughGenomeFactory(
             Genome.new_default_genome((5,), fitness_func))
-        convergence_criterion = PassThroughConvergenceCriterion(True)
-        optimizer_builder = BasicOptimizerBuilder((5,),
-                                                  NumpyRNG(),
-                                                  genome_factory,
-                                                  convergence_criterion,
-                                                  fitness_func)
+        annealing_schedule = PassThroughAnnealingSchedule(0, True)
+        optimizer_builder = BasicAnnealerOptimizerBuilder((5,),
+                                                          NumpyRNG(),
+                                                          genome_factory,
+                                                          annealing_schedule,
+                                                          fitness_func)
 
         with self.assertRaises(InitialPopulationUndefinedException):
             optimizer_builder.build()
@@ -116,12 +116,12 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
         unused_spy_fitness_function_holder = SpyFitnessFunc()
         genome_factory = PassThroughGenomeFactory(
             Genome.new_default_genome((5,), unused_spy_fitness_function_holder.fitness_func))
-        convergence_criterion = PassThroughConvergenceCriterion(True)
-        optimizer_builder = BasicOptimizerBuilder((5,),
-                                                  NumpyRNG(),
-                                                  genome_factory,
-                                                  convergence_criterion,
-                                                  unused_spy_fitness_function_holder.fitness_func)
+        annealing_schedule = PassThroughAnnealingSchedule(0, True)
+        optimizer_builder = BasicAnnealerOptimizerBuilder((5,),
+                                                          NumpyRNG(),
+                                                          genome_factory,
+                                                          annealing_schedule,
+                                                          unused_spy_fitness_function_holder.fitness_func)
 
         spy_fitness_function_holder = SpyFitnessFunc()
         population_genome = Genome(spy_fitness_function_holder.fitness_func, [0, 0, 0, 0, 0])
@@ -132,7 +132,7 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
 
         self.assertAlmostEqual(optimizer.best_genome.fitness, 69.0)
         self.assertEqual(spy_fitness_function_holder.fitness_func_executions, 1)
-        self.assertIsInstance(optimizer, BasicOptimizer)
+        self.assertIsInstance(optimizer, BasicAnnealingOptimizer)
 
         with self.assertRaises(InitialPopulationUndefinedException):
             optimizer_builder.new_population().build()

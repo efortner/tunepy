@@ -13,7 +13,7 @@ class BasicAnnealingOptimizer(AbstractOptimizer):
         self._annealing_schedule = annealing_schedule
         self._rng = rng
         self._max_fitness = float('-inf')
-        self._best_genome = None
+        self._best_genome = initial_candidate
         self._converged = False
 
     def next(self):
