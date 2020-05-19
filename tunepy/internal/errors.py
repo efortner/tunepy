@@ -2,6 +2,10 @@ class CrossValidatorBinException(Exception):
     pass
 
 
+class TimeSeriesCrossValidatorBinException(Exception):
+    pass
+
+
 class DimensionsMismatchException(Exception):
     pass
 

@@ -1,6 +1,6 @@
 import unittest
 from tunepy.validators import CrossValidator
-from tunepy.internal import *
+from tunepy import *
 from tunepy.interfaces.stubs import *
 
 
