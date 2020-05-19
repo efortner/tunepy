@@ -85,5 +85,9 @@ class TestTimeSeriesCrossValidator(unittest.TestCase):
         fitness = validator.validate(data_features, data_labels, ConstantFitnessLearner(69.0))
         self.assertAlmostEqual(69.0, fitness)
 
+    def test_bin_count(self):
+        validator = TimeSeriesCrossValidator(10)
+        self.assertEqual(10, validator.bins)
+
 if __name__ == '__main__':
     unittest.main()
