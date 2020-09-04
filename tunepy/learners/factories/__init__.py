@@ -1,1 +1,2 @@
 from tunepy.learners.factories.sklearn_mlp_classifier_factory import SklearnMlpClassifierFactory
+from tunepy.learners.factories.sklearn_mlp_regressor_factory import SklearnMlpRegressorFactory
