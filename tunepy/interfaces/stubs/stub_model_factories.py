@@ -1,15 +1,11 @@
-from tunepy.interfaces import AbstractModelFactory
+from tunepy.interfaces import AbstractLearnerFactory
 from tunepy.interfaces.stubs import ConstantFitnessLearner
 
 
-class ConstantFitnessLearnerFactory(AbstractModelFactory):
+class ConstantFitnessLearnerFactory(AbstractLearnerFactory):
     """
     Builds ConstantFitnessLearners.
     """
-
-    @staticmethod
-    def generate_bitstring(rng):
-        return [0]
 
     def __init__(self, fitness):
         self._fitness = fitness
