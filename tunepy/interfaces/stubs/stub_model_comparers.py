@@ -1,7 +1,7 @@
-from tunepy.interfaces import AbstractModelComparer
+from tunepy.interfaces import AbstractGenomeComparer
 
 
-class PassThroughComparer(AbstractModelComparer):
+class PassThroughComparer(AbstractGenomeComparer):
     """
     Returns the first item passed into it.
     """
@@ -15,7 +15,7 @@ class PassThroughComparer(AbstractModelComparer):
         return genomes[0]
 
 
-class IncrementalComparer(AbstractModelComparer):
+class IncrementalComparer(AbstractGenomeComparer):
     """
     Returns the next item from the list.
     """

@@ -1,5 +1,5 @@
 from tunepy.interfaces.abstract_learner import AbstractLearner
-from tunepy.interfaces.abstract_model_comparer import AbstractModelComparer
+from tunepy.interfaces.abstract_genome_comparer import AbstractGenomeComparer
 from tunepy.interfaces.abstract_optimizer import AbstractOptimizer
 from tunepy.interfaces.abstract_rng import AbstractRandomNumberGenerator
 from tunepy.interfaces.abstract_learner_factory import AbstractLearnerFactory

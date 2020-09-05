@@ -1,7 +1,8 @@
 import unittest
+
+from tunepy import Genome
 from tunepy.comparison import RouletteWheelComparer
 from tunepy.interfaces import AbstractRandomNumberGenerator
-from tunepy.interfaces.stubs import NumpyOnesRandom, ConstantFitnessLearner
 
 
 class TestRouletteWheelComparer(unittest.TestCase):
@@ -17,9 +18,12 @@ class TestRouletteWheelComparer(unittest.TestCase):
 
         rng = CustomRandom()
         comparer = RouletteWheelComparer(rng)
-        models = [ConstantFitnessLearner(10 - index) for index in range(10)]
+        genomes = [Genome.new_default_genome((10-index,), lambda bitstring: len(bitstring)) for index in range(10)]
 
-        returned_model = comparer.compare(models)
+        for genome in genomes:
+            genome.run()
+
+        returned_model = comparer.compare(genomes)
         self.assertEqual(10, returned_model.fitness)
 
     def test_returns_worst_model(self):
@@ -33,9 +37,12 @@ class TestRouletteWheelComparer(unittest.TestCase):
 
         rng = CustomRandom()
         comparer = RouletteWheelComparer(rng)
-        models = [ConstantFitnessLearner(10 - index) for index in range(10)]
+        genomes = [Genome.new_default_genome((10-index,), lambda bitstring: len(bitstring)) for index in range(10)]
 
-        returned_model = comparer.compare(models)
+        for genome in genomes:
+            genome.run()
+
+        returned_model = comparer.compare(genomes)
         self.assertEqual(1, returned_model.fitness)
 
     def test_returns_median_model(self):
@@ -49,22 +56,14 @@ class TestRouletteWheelComparer(unittest.TestCase):
 
         rng = CustomRandom()
         comparer = RouletteWheelComparer(rng)
-        models = [ConstantFitnessLearner(10 - index) for index in range(10)]
+        genomes = [Genome.new_default_genome((10-index,), lambda bitstring: len(bitstring)) for index in range(10)]
 
-        returned_model = comparer.compare(models)
+        for genome in genomes:
+            genome.run()
+
+        returned_model = comparer.compare(genomes)
         self.assertEqual(5, returned_model.fitness)
 
-    def test_cached_fitness(self):
-        rng = NumpyOnesRandom()
-        comparer = RouletteWheelComparer(rng)
-        models = [ConstantFitnessLearner(10 - index) for index in range(10)]
-
-        first_check = comparer.extract_fitness_from_genomes(models)
-        second_check = comparer.extract_fitness_from_genomes(models)
-
-        self.assertTrue(first_check)
-        self.assertFalse(second_check)
-        self.assertAlmostEqual(10, comparer._max_fitness)
 
 if __name__ == '__main__':
     unittest.main()
