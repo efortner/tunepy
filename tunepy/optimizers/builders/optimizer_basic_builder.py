@@ -22,10 +22,11 @@ class BasicOptimizerBuilder(AbstractOptimizerBuilder):
         self._population = []
 
     def add_to_initial_population_from_factory(self, genome_factory, n):
-        base_genome = Genome.new_default_genome(genome_factory.dimensions,
-                                                self._fitness_func,
-                                                *self._args,
-                                                **self._kwargs)
+        base_genome = Genome.new_default_genome(
+            genome_factory.dimensions,
+            self._fitness_func,
+            *self._args,
+            **self._kwargs)
         self._population += [genome_factory.build([base_genome]) for _ in range(n)]
         return self
 

@@ -8,7 +8,7 @@ class UniformCrossoverGenomeFactory(AbstractGenomeFactory):
     """ Genome factory that allows crossover of bits from either parent """
 
     def __init__(self,
-                 dimensions: tuple,
+                 dimensions: Tuple,
                  rng: AbstractRandomNumberGenerator,
                  mutation_rate: float,
                  comparer: AbstractGenomeComparer,
@@ -81,7 +81,7 @@ class SinglePointCrossoverGenomeFactory(AbstractGenomeFactory):
     including a crossover point from the other parent """
 
     def __init__(self,
-                 dimensions: tuple,
+                 dimensions: Tuple,
                  rng: AbstractRandomNumberGenerator,
                  mutation_rate: float,
                  comparer: AbstractGenomeComparer,

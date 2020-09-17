@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Tuple
 
 
 class AbstractRandomNumberGenerator(ABC):
@@ -7,29 +8,32 @@ class AbstractRandomNumberGenerator(ABC):
     """
 
     @abstractmethod
-    def random_int_array(self, minimum, maximum, shape):
+    def random_int_array(self, minimum: int, maximum: int, shape: Tuple) -> Tuple:
         """
-        Builds an array-like structure of random integers.
-        :param minimum: Minimum integer value (inclusive).
-        :param maximum: Maximum integer value (exclusive).
-        :param shape: Tuple representing the shape of the output.
-        :return: Array-like collection of integers.
+        Builds an array-like structure of random integers
+
+        :param minimum: minimum value (inclusive)
+        :param maximum: maximum value (exclusive)
+        :param shape: the shape of the output
+        :return: a collection of integers
         """
         pass
 
     @abstractmethod
-    def random(self):
+    def random(self) -> float:
         """
-        Returns a random number between 0 and 1.
-        :return: A single random number between 0 and 1.
+        Returns a random number between 0 and 1
+
+        :return: random number between 0 and 1
         """
         pass
 
-    def random_int(self, minimum, maximum):
+    def random_int(self, minimum: int, maximum: int) -> int:
         """
-        Returns a single random integer.
-        :param minimum: Minimum integer value (inclusive).
-        :param maximum: Maximum integer value (exclusive).
-        :return: A random integer.
+        Returns a single random integer
+
+        :param minimum: minimum value (inclusive)
+        :param maximum: maximum value (exclusive)
+        :return: random integer
         """
         return self.random_int_array(minimum, maximum, shape=(1,))[0]

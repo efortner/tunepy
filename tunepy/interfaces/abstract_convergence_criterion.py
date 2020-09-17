@@ -8,7 +8,8 @@ class AbstractConvergenceCriterion(ABC):
 
     @abstractmethod
     def converged(self, old_candidate: Genome, new_candidate: Genome) -> bool:
-        """ Determines if convergence has been reached based on current and prior Genome objects
+        """
+        Determines if convergence has been reached based on current and prior Genome objects
 
         :param old_candidate: Genome object from prior iteration
         :param new_candidate: Genome object from current iteration

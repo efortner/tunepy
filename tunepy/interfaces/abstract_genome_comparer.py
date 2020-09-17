@@ -5,7 +5,9 @@ from tunepy import Genome
 
 
 class AbstractGenomeComparer(ABC):
-    """Interface for comparing multiple Genomes"""
+    """
+    Interface for comparing multiple Genomes
+    """
 
     @abstractmethod
     def compare(self, genomes: List[Genome]) -> Genome:

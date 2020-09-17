@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List
+from typing import List, Tuple
 
 from tunepy import Genome
 
@@ -18,7 +18,7 @@ class AbstractGenomeFactory(ABC):
 
     @property
     @abstractmethod
-    def dimensions(self) -> tuple:
+    def dimensions(self) -> Tuple:
         """
 
         :return: the dimensions of Genome objects returned by this factory

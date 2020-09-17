@@ -9,11 +9,12 @@ class TestPrebuiltOptimizers(unittest.TestCase):
         def fitness_func(bitstring):
             return 69.0
 
-        optimizer = new_random_restart_hill_climber((5,),
-                                                    7,
-                                                    10,
-                                                    1e-5,
-                                                    fitness_func)
+        optimizer = new_random_restart_hill_climber(
+            (5,),
+            7,
+            10,
+            1e-5,
+            fitness_func)
 
         self.assertIsInstance(optimizer, BasicRestartOptimizer)
         self.assertFalse(optimizer.converged)
@@ -30,12 +31,13 @@ class TestPrebuiltOptimizers(unittest.TestCase):
         def fitness_func(bitstring):
             return 69.0
 
-        optimizer = new_simulated_annealer((5,),
-                                           1,
-                                           10,
-                                           3,
-                                           0.5,
-                                           fitness_func)
+        optimizer = new_simulated_annealer(
+            (5,),
+            1,
+            10,
+            3,
+            0.5,
+            fitness_func)
 
         self.assertIsInstance(optimizer, BasicAnnealingOptimizer)
         self.assertFalse(optimizer.converged)
@@ -52,10 +54,11 @@ class TestPrebuiltOptimizers(unittest.TestCase):
         def fitness_func(bitstring):
             return 69.0
 
-        optimizer = new_hill_climber((5,),
-                                     10,
-                                     1e-5,
-                                     fitness_func)
+        optimizer = new_hill_climber(
+            (5,),
+            10,
+            1e-5,
+            fitness_func)
 
         self.assertIsInstance(optimizer, BasicOptimizer)
         self.assertFalse(optimizer.converged)
@@ -72,12 +75,13 @@ class TestPrebuiltOptimizers(unittest.TestCase):
         def fitness_func(bitstring):
             return 69.0
 
-        optimizer = new_genetic_optimizer((5,),
-                                          100,
-                                          0.2,
-                                          10,
-                                          1e-5,
-                                          fitness_func)
+        optimizer = new_genetic_optimizer(
+            (5,),
+            100,
+            0.2,
+            10,
+            1e-5,
+            fitness_func)
 
         self.assertIsInstance(optimizer, BasicGeneticOptimizer)
         self.assertFalse(optimizer.converged)
