@@ -1,5 +1,6 @@
-from abc import ABC, abstractmethod
+from __future__ import annotations
 
+from abc import ABC, abstractmethod
 from tunepy import Genome
 from tunepy.interfaces import AbstractGenomeFactory, AbstractOptimizer
 
@@ -13,7 +14,7 @@ class AbstractOptimizerBuilder(ABC):
     def add_to_initial_population_from_factory(
             self,
             genome_factory: AbstractGenomeFactory,
-            n: int):
+            n: int) -> AbstractOptimizerBuilder:
         """
         Adds a given number of Genomes to the initial population of this optimizer from a factory
 
@@ -24,7 +25,7 @@ class AbstractOptimizerBuilder(ABC):
         pass
 
     @abstractmethod
-    def add_to_initial_population(self, genome: Genome):
+    def add_to_initial_population(self, genome: Genome) -> AbstractOptimizerBuilder:
         """
         Adds a single Genome instance to the initial population of this optimizer
 
@@ -43,7 +44,7 @@ class AbstractOptimizerBuilder(ABC):
         pass
 
     @abstractmethod
-    def new_population(self):
+    def clear(self) -> AbstractOptimizerBuilder:
         """
         Clears the initial population of this builder
 

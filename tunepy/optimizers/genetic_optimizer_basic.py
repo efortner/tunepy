@@ -1,5 +1,7 @@
-from tunepy.interfaces import AbstractOptimizer
-from tunepy import get_best_genome
+from typing import List
+
+from tunepy.interfaces import AbstractOptimizer, AbstractGenomeFactory, AbstractConvergenceCriterion
+from tunepy import get_best_genome, Genome
 
 
 class BasicGeneticOptimizer(AbstractOptimizer):
@@ -7,7 +9,18 @@ class BasicGeneticOptimizer(AbstractOptimizer):
     Optimizes fitness using successive refinements of a random population of solutions.
     """
 
-    def __init__(self, initial_population, genome_factory, convergence_criterion):
+    def __init__(
+            self,
+            initial_population: List[Genome],
+            genome_factory: AbstractGenomeFactory,
+            convergence_criterion: AbstractConvergenceCriterion):
+        """
+        Creates a new BasicGeneticOptimizer.
+
+        :param initial_population: initial seed of Genome objects
+        :param genome_factory: creates new Genome objects
+        :param convergence_criterion: will declare convergence once criterion is satisfied
+        """
         self._population = initial_population
         self._genome_factory = genome_factory
         self._convergence_criterion = convergence_criterion
@@ -16,6 +29,10 @@ class BasicGeneticOptimizer(AbstractOptimizer):
         self._converged = False
 
     def next(self):
+        """
+        Performs the next iteration of optimization.
+
+        """
         old_population = self._population
 
         self._population = []
@@ -31,11 +48,21 @@ class BasicGeneticOptimizer(AbstractOptimizer):
         self._converged = self._convergence_criterion.converged(get_best_genome(old_population), self.best_genome)
 
     @property
-    def converged(self):
+    def converged(self) -> bool:
+        """
+        Whether or not this algorithm has converged
+
+        :return: true when this algorithm has converged or false if not
+        """
         return self._converged
 
     @property
-    def best_genome(self):
+    def best_genome(self) -> Genome:
+        """
+        The best genome so far
+
+        :return: a Genome instance
+        """
         if self._best_genome is None:
             self._best_genome = get_best_genome(self._population)
         return self._best_genome

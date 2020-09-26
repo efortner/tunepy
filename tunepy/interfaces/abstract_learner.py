@@ -8,7 +8,7 @@ class AbstractLearner(ABC):
     """
 
     @abstractmethod
-    def fit(self, x_train: Tuple, y_train: Tuple):
+    def fit(self, x_train, y_train):
         """
         Trains the model on a labeled dataset
 
@@ -18,7 +18,7 @@ class AbstractLearner(ABC):
         pass
 
     @abstractmethod
-    def evaluate(self, x_test: Tuple, y_test: Tuple) -> float:
+    def evaluate(self, x_test, y_test) -> float:
         """
         Returns a fitness score after predicting labels on a dataset
 

@@ -1,16 +1,33 @@
 from copy import deepcopy
+from typing import Tuple
 
 from tunepy import DimensionsMismatchException, TimeSeriesCrossValidatorBinException
-from tunepy.interfaces import AbstractValidator
+from tunepy.interfaces import AbstractValidator, AbstractLearner
 
 
 class TimeSeriesCrossValidator(AbstractValidator):
-    def __init__(self, bins):
+    """
+    Performs cross validation on time series data.
+    """
+    def __init__(self, bins: int):
+        """
+        Creates a new TimeSeriesCrossValidator.
+
+        :param bins: number of bins (must be at least 2)
+        """
         self._bins = bins
         self._feature_bins = []
         self._label_bins = []
 
-    def validate(self, x, y, model):
+    def validate(self, x, y, model: AbstractLearner) -> float:
+        """
+        Creates a fitness score for the provided model and data
+
+        :param x: array-like dataset features
+        :param y: array-like dataset labels
+        :param model: untrained learner
+        :return: a fitness score
+        """
         if self._bins < 2:
             raise TimeSeriesCrossValidatorBinException
 

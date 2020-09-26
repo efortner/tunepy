@@ -10,7 +10,7 @@ class AbstractValidator(ABC):
     """
 
     @abstractmethod
-    def validate(self, x: Tuple, y: Tuple, model: AbstractLearner) -> float:
+    def validate(self, x, y, model: AbstractLearner) -> float:
         """
         Creates a fitness score for the provided model and data
 

@@ -10,9 +10,9 @@ class HillClimberGenomeFactory(AbstractGenomeFactory):
             self,
             dimensions: Tuple,
             rng: AbstractRandomNumberGenerator,
-            fitness_func: Callable[[Tuple], float],
-            *args: List,
-            **kwargs: Dict):
+            fitness_func: Callable[..., float],
+            *args,
+            **kwargs):
         """
         Creates a new HillClimberGenomeFactory
 

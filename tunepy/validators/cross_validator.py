@@ -1,4 +1,6 @@
-from tunepy.interfaces import AbstractValidator
+from typing import Tuple
+
+from tunepy.interfaces import AbstractValidator, AbstractLearner
 from tunepy.internal import *
 import numpy as np
 from copy import deepcopy
@@ -10,10 +12,11 @@ class CrossValidator(AbstractValidator):
     of the trained models.
     """
 
-    def __init__(self, bins):
+    def __init__(self, bins: int):
         """
         Creates a new CrossValidator.
-        :param bins: The number of bins to divide the data into. Must be at least 2.
+
+        :param bins: number of bins (must be at least 2)
         """
         self._bins = bins
         self._feature_bins_train = []
@@ -21,13 +24,14 @@ class CrossValidator(AbstractValidator):
         self._label_bins_train = []
         self._label_bins_test = []
 
-    def validate(self, x, y, model):
+    def validate(self, x, y, model: AbstractLearner) -> float:
         """
-        Creates a holistic fitness score for the provided model and data.
-        :param x: Array-like dataset features.
-        :param y: Array-like dataset labels.
-        :param model: An untrained model of a class than implements AbstractLearner.
-        :return:
+        Creates a fitness score for the provided model and data
+
+        :param x: array-like dataset features
+        :param y: array-like dataset labels
+        :param model: untrained learner
+        :return: a fitness score
         """
         if self._bins < 2:
             raise CrossValidatorBinException
@@ -48,12 +52,6 @@ class CrossValidator(AbstractValidator):
         return float(total_fitness / self._bins)
 
     def build_test_bins(self, x, y):
-        """
-        Creates a set of test bins from the provided data set. Mutually exclusive with bins created by
-        CrossValidator.build_train_bins(x, y).
-        :param x: Array-like of features.
-        :param y: Vector of labels.
-        """
         if len(x) != len(y):
             raise DimensionsMismatchException
 
@@ -75,12 +73,6 @@ class CrossValidator(AbstractValidator):
                 self._label_bins_test[index] = y[start_slice:end_slice]
 
     def build_train_bins(self, x, y):
-        """
-        Creates a set of training bins from the provided data set. Mutually exclusive with bins created by
-        CrossValidator.build_test_bins(x, y).
-        :param x: Array-like of features.
-        :param y: Vector of labels.
-        """
         if len(x) != len(y):
             raise DimensionsMismatchException
 

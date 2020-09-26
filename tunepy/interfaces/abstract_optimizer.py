@@ -34,3 +34,4 @@ class AbstractOptimizer(ABC):
 
         :return: a Genome instance
         """
+        pass

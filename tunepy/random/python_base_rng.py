@@ -1,3 +1,5 @@
+from typing import Tuple
+
 from tunepy.interfaces import AbstractRandomNumberGenerator
 import random
 
@@ -7,23 +9,30 @@ class PythonBaseRNG(AbstractRandomNumberGenerator):
     A tunepy wrapper of the built in Python random number generator.
     """
 
-    def random(self):
+    def __init__(self, seed):
         """
-        Returns a random number between 0 and 1.
-        :return: A single random number between 0 and 1.
+        Creates a new PythonBaseRNG.
+
+        :param seed: seed passed into python's random
+        """
+        random.seed(seed)
+
+    def random(self) -> float:
+        """
+        Returns a random number between 0 and 1
+
+        :return: random number between 0 and 1
         """
         return random.random()
 
-    def __init__(self, seed):
-        random.seed(seed)
-
-    def random_int_array(self, minimum, maximum, shape):
+    def random_int_array(self, minimum: int, maximum: int, shape: Tuple) -> Tuple:
         """
-        Builds an array-like structure of random integers.
-        :param minimum: Minimum integer value (inclusive).
-        :param maximum: Maximum integer value (exclusive).
-        :param shape: Tuple representing the shape of the output.
-        :return: Array-like collection of integers.
+        Builds an array-like structure of random integers
+
+        :param minimum: minimum value (inclusive)
+        :param maximum: maximum value (exclusive)
+        :param shape: the shape of the output
+        :return: a collection of integers
         """
 
         def traverse_next_dimension(new_shape, array):
@@ -43,4 +52,4 @@ class PythonBaseRNG(AbstractRandomNumberGenerator):
 
         return_array = []
         traverse_next_dimension(shape, return_array)
-        return return_array
+        return tuple(return_array)

@@ -10,8 +10,8 @@ class TestSingleCrossoverGenomeBuilder(unittest.TestCase):
         def fitness_func(bitstring):
             return 0.0
 
-        left = Genome(fitness_func, [0, 0, 0, 0, 0])
-        right = Genome(fitness_func, [1, 1, 1, 1, 1])
+        left = Genome(fitness_func, (0, 0, 0, 0, 0))
+        right = Genome(fitness_func, (1, 1, 1, 1, 1))
         dimensions = (4,)
 
         comparer = IncrementalComparer()
@@ -25,8 +25,8 @@ class TestSingleCrossoverGenomeBuilder(unittest.TestCase):
         def fitness_func(bitstring):
             return 0.0
 
-        left = Genome(fitness_func, [0, 0, 0, 0, 0])
-        right = Genome(fitness_func, [0, 0, 0, 0, 0])
+        left = Genome(fitness_func, (0, 0, 0, 0, 0))
+        right = Genome(fitness_func, (0, 0, 0, 0, 0))
         dimensions = (5,)
 
         comparer = IncrementalComparer()

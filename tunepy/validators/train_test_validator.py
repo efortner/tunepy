@@ -1,9 +1,17 @@
-from tunepy.interfaces import AbstractValidator
+from tunepy.interfaces import AbstractValidator, AbstractLearner
 from tunepy.internal import DimensionsMismatchException, TrainTestSplitException
 
 
 class TrainTestValidator(AbstractValidator):
-    def __init__(self, train_test_ratio):
+    """
+    Trains models on a portion of the data and evaluates performs on the other.
+    """
+    def __init__(self, train_test_ratio: float):
+        """
+        Creates a new TrainTestValidator.
+
+        :param train_test_ratio: portion of data used for training (must be on interval (0,1))
+        """
         self._train_test_ratio = train_test_ratio
         self._x = []
         self._y = []
@@ -12,7 +20,15 @@ class TrainTestValidator(AbstractValidator):
         self._train_features = []
         self._train_labels = []
 
-    def validate(self, x, y, model):
+    def validate(self, x, y, model: AbstractLearner) -> float:
+        """
+        Creates a fitness score for the provided model and data
+
+        :param x: array-like dataset features
+        :param y: array-like dataset labels
+        :param model: untrained learner
+        :return: a fitness score
+        """
         if len(x) != len(y):
             raise DimensionsMismatchException
 

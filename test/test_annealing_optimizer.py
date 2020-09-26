@@ -13,11 +13,11 @@ class TestAnnealingOptimizer(unittest.TestCase):
         def fitness_func_one(bitstring):
             return 1
 
-        initial_candidate = Genome(fitness_func_one, [0])
+        initial_candidate = Genome(fitness_func_one, (0,))
         initial_candidate.run()
 
         annealing_schedule = PassThroughAnnealingSchedule(0.9, True)
-        genome_builder = PassThroughGenomeFactory(Genome(fitness_func_zero, [1]))
+        genome_builder = PassThroughGenomeFactory(Genome(fitness_func_zero, (1,)))
         rng = NumpyCustomRandom(0.0, 1)
         optimizer = BasicAnnealingOptimizer(initial_candidate, genome_builder, annealing_schedule, rng)
 
@@ -33,11 +33,11 @@ class TestAnnealingOptimizer(unittest.TestCase):
         def fitness_func_one(bitstring):
             return 1
 
-        initial_candidate = Genome(fitness_func_zero, [0])
+        initial_candidate = Genome(fitness_func_zero, (0,))
         initial_candidate.run()
 
         annealing_schedule = PassThroughAnnealingSchedule(0.9, True)
-        genome_builder = PassThroughGenomeFactory(Genome(fitness_func_one, [1]))
+        genome_builder = PassThroughGenomeFactory(Genome(fitness_func_one, (1,)))
         rng = NumpyCustomRandom(0.0, 1)
         optimizer = BasicAnnealingOptimizer(initial_candidate, genome_builder, annealing_schedule, rng)
 
@@ -50,11 +50,11 @@ class TestAnnealingOptimizer(unittest.TestCase):
         def fitness_func_zero(bitstring):
             return 0
 
-        initial_candidate = Genome(fitness_func_zero, [0])
+        initial_candidate = Genome(fitness_func_zero, (0,))
         initial_candidate.run()
 
         annealing_schedule = PassThroughAnnealingSchedule(0.9, True)
-        genome_builder = PassThroughGenomeFactory(Genome(fitness_func_zero, [1]))
+        genome_builder = PassThroughGenomeFactory(Genome(fitness_func_zero, (1,)))
         rng = NumpyCustomRandom(0.0, 1)
         optimizer = BasicAnnealingOptimizer(initial_candidate, genome_builder, annealing_schedule, rng)
 
