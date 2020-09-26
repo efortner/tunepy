@@ -83,7 +83,7 @@ def new_simulated_annealer(
         degradation_multiplier: float,
         fitness_func: Callable[..., float],
         *args,
-        **kwargs):
+        **kwargs) -> AbstractOptimizer:
     """
     Creates a new optimizer that optimizes by simulated annealing using a default temperature schedule.
 
@@ -136,7 +136,7 @@ def new_hill_climber(
         epsilon: float,
         fitness_func: Callable[..., float],
         *args,
-        **kwargs):
+        **kwargs) -> AbstractOptimizer:
     """
     Builds a new optimizer that generates and evaluates a candidate, finds a neighbor of this candidate,
     and determines if the neighbor is more suitable than the original candidate.
@@ -185,7 +185,7 @@ def new_genetic_optimizer(
         epsilon: float,
         fitness_func: Callable[..., float],
         *args,
-        **kwargs):
+        **kwargs) -> AbstractOptimizer:
     """
     Builds a new optimizer that evaluates a population's fitness, probabilistically chooses the best candidates,
     and constructs a new population from the old. It continues this until the best candidate from the population is
