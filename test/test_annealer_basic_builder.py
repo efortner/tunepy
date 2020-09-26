@@ -12,6 +12,7 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
     def test_add_to_initial_population_from_factory_returns_self(self):
         def fitness_func(bitstring):
             self.fail()
+            return 0.0
 
         genome_factory = PassThroughGenomeFactory(Genome.new_default_genome((5,), fitness_func))
         annealing_schedule = PassThroughAnnealingSchedule(0, True)
@@ -27,6 +28,7 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
     def test_add_to_initial_population_returns_self(self):
         def fitness_func(bitstring):
             self.fail()
+            return 0.0
 
         genome_factory = PassThroughGenomeFactory(Genome.new_default_genome((5,), fitness_func))
         annealing_schedule = PassThroughAnnealingSchedule(0, True)
@@ -78,7 +80,7 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
                                                           unused_spy_fitness_function_holder.fitness_func)
 
         spy_fitness_function_holder = SpyFitnessFunc()
-        population_genome = Genome(spy_fitness_function_holder.fitness_func, [0, 0, 0, 0, 0])
+        population_genome = Genome(spy_fitness_function_holder.fitness_func, (0, 0, 0, 0, 0))
 
         optimizer = optimizer_builder \
             .add_to_initial_population(population_genome) \
@@ -91,6 +93,7 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
     def test_build_raises_exception_with_no_population(self):
         def fitness_func(bitstring):
             self.fail()
+            return 0.0
 
         genome_factory = PassThroughGenomeFactory(
             Genome.new_default_genome((5,), fitness_func))
@@ -124,7 +127,7 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
                                                           unused_spy_fitness_function_holder.fitness_func)
 
         spy_fitness_function_holder = SpyFitnessFunc()
-        population_genome = Genome(spy_fitness_function_holder.fitness_func, [0, 0, 0, 0, 0])
+        population_genome = Genome(spy_fitness_function_holder.fitness_func, (0, 0, 0, 0, 0))
 
         optimizer = optimizer_builder \
             .add_to_initial_population(population_genome) \
@@ -135,7 +138,7 @@ class TestOptimizerBasicBuilder(unittest.TestCase):
         self.assertIsInstance(optimizer, BasicAnnealingOptimizer)
 
         with self.assertRaises(InitialPopulationUndefinedException):
-            optimizer_builder.new_population().build()
+            optimizer_builder.clear().build()
 
 
 if __name__ == '__main__':

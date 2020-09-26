@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 
+from tunepy import Genome
+
 
 class AbstractOptimizer(ABC):
     """
@@ -16,18 +18,20 @@ class AbstractOptimizer(ABC):
 
     @property
     @abstractmethod
-    def converged(self):
+    def converged(self) -> bool:
         """
-        Whether or not this algorithm has converged.
+        Whether or not this algorithm has converged
 
-        :return: A boolean true when this algorithm has converged or false if not.
+        :return: true when this algorithm has converged or false if not
         """
         pass
 
     @property
     @abstractmethod
-    def best_genome(self):
+    def best_genome(self) -> Genome:
         """
-        The best genome so far. A value should only be assumed when self.converged is true.
-        :return: A Genome object.
+        The best genome so far
+
+        :return: a Genome instance
         """
+        pass

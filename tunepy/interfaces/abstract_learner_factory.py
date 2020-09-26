@@ -1,16 +1,20 @@
 from abc import ABC, abstractmethod
+from typing import Tuple
+
+from tunepy.interfaces import AbstractLearner
 
 
 class AbstractLearnerFactory(ABC):
     """
-    The common interface for that tunepy expects from all model builders.
+    The common interface that tunepy expects from all model builders.
     """
 
     @abstractmethod
-    def build(self, bitstring):
+    def build(self, bitstring: Tuple) -> AbstractLearner:
         """
-        Builds a new model object with hyperparameters derived from the provided bitstring.
-        :param bitstring: A bitstring representing hyperparameters for this model.
-        :return: A new, untrained learner.
+        Builds a new model object with hyperparameters derived from the provided bitstring
+
+        :param bitstring: a bitstring representing hyperparameters for this model
+        :return: a new, untrained learner
         """
         pass

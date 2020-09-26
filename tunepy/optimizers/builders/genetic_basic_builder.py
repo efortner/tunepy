@@ -1,17 +1,36 @@
+from typing import Tuple, Callable
+
 from tunepy import InitialPopulationUndefinedException, Genome
-from tunepy.interfaces import AbstractOptimizerBuilder
+from tunepy.interfaces import AbstractOptimizerBuilder, AbstractRandomNumberGenerator, AbstractGenomeFactory, \
+    AbstractConvergenceCriterion, AbstractOptimizer
 from tunepy.optimizers import BasicGeneticOptimizer
 
 
 class BasicGeneticOptimizerBuilder(AbstractOptimizerBuilder):
-    def __init__(self,
-                 dimensions,
-                 rng,
-                 new_candidate_genome_factory,
-                 convergence_criterion,
-                 fitness_func,
-                 *args,
-                 **kwargs):
+    """
+    Builds new instances of BasicGeneticOptimizer.
+    """
+
+    def __init__(
+            self,
+            dimensions: Tuple,
+            rng: AbstractRandomNumberGenerator,
+            new_candidate_genome_factory: AbstractGenomeFactory,
+            convergence_criterion: AbstractConvergenceCriterion,
+            fitness_func: Callable[..., float],
+            *args,
+            **kwargs):
+        """
+        Creates a new BasicGeneticOptimizerBuilder.
+
+        :param dimensions: dimensions of bitstrings
+        :param rng: a random number generator
+        :param new_candidate_genome_factory: factory for building new Genome objects
+        :param convergence_criterion: criterion to use for declaring convergence
+        :param fitness_func: fitness function passed into new Genome objects
+        :param args: will be passed into fitness_func
+        :param kwargs: will be passed into fitness_func
+        """
         self._dimensions = dimensions
         self._rng = rng
         self._fitness_func = fitness_func
@@ -21,7 +40,17 @@ class BasicGeneticOptimizerBuilder(AbstractOptimizerBuilder):
         self._kwargs = kwargs
         self._population = []
 
-    def add_to_initial_population_from_factory(self, genome_factory, n):
+    def add_to_initial_population_from_factory(
+            self,
+            genome_factory: AbstractGenomeFactory,
+            n: int) -> AbstractOptimizerBuilder:
+        """
+        Adds a given number of Genomes to the initial population of this optimizer from a factory
+
+        :param genome_factory: the factory that will generate the Genome
+        :param n: number of instances to add
+        :return: self
+        """
         base_genome = Genome.new_default_genome(genome_factory.dimensions,
                                                 self._fitness_func,
                                                 *self._args,
@@ -29,11 +58,22 @@ class BasicGeneticOptimizerBuilder(AbstractOptimizerBuilder):
         self._population += [genome_factory.build([base_genome]) for _ in range(n)]
         return self
 
-    def add_to_initial_population(self, genome):
+    def add_to_initial_population(self, genome: Genome) -> AbstractOptimizerBuilder:
+        """
+        Adds a single Genome instance to the initial population of this optimizer
+
+        :param genome: instance to add
+        :return: self
+        """
         self._population.append(genome)
         return self
 
-    def build(self):
+    def build(self) -> AbstractOptimizer:
+        """
+        Constructs a new optimizer
+
+        :return: a new optimizer
+        """
         for genome in self._population:
             genome.run()
 
@@ -46,6 +86,11 @@ class BasicGeneticOptimizerBuilder(AbstractOptimizerBuilder):
 
         return new_optimizer
 
-    def new_population(self):
+    def clear(self) -> AbstractOptimizerBuilder:
+        """
+        Clears the initial population of this builder
+
+        :return: self
+        """
         self._population = []
         return self

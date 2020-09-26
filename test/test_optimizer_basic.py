@@ -13,10 +13,10 @@ class TestOptimizerBasic(unittest.TestCase):
         def fitness_func_one(bitstring):
             return 1
 
-        initial_candidate = Genome(fitness_func_zero, [0])
+        initial_candidate = Genome(fitness_func_zero, (0,))
 
         convergence_criterion = PassThroughConvergenceCriterion(True)
-        genome_builder = PassThroughGenomeFactory(Genome(fitness_func_one, [1]))
+        genome_builder = PassThroughGenomeFactory(Genome(fitness_func_one, (1,)))
         optimizer = BasicOptimizer(initial_candidate, genome_builder, convergence_criterion)
 
         optimizer.next()
@@ -27,10 +27,10 @@ class TestOptimizerBasic(unittest.TestCase):
         def fitness_func_zero(bitstring):
             return 0
 
-        initial_candidate = Genome(fitness_func_zero, [0])
+        initial_candidate = Genome(fitness_func_zero, (0,))
 
         convergence_criterion = PassThroughConvergenceCriterion(True)
-        genome_builder = PassThroughGenomeFactory(Genome(fitness_func_zero, [1]))
+        genome_builder = PassThroughGenomeFactory(Genome(fitness_func_zero, (1,)))
         optimizer = BasicOptimizer(initial_candidate, genome_builder, convergence_criterion)
 
         self.assertFalse(optimizer.converged)

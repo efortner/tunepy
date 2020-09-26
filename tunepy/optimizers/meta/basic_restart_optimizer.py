@@ -1,8 +1,27 @@
-from tunepy.interfaces import AbstractOptimizer
+from tunepy import Genome
+from tunepy.interfaces import AbstractOptimizer, AbstractOptimizerBuilder, AbstractGenomeFactory, \
+    AbstractConvergenceCriterion
 
 
 class BasicRestartOptimizer(AbstractOptimizer):
-    def __init__(self, optimizer_builder, genome_factory, population_size, convergence_criterion):
+    """
+    An optimizer that creates other optimizers, tests them to convergence, and repeats until its own convergence
+    criterion is met.
+    """
+    def __init__(
+            self,
+            optimizer_builder: AbstractOptimizerBuilder,
+            genome_factory: AbstractGenomeFactory,
+            population_size: int,
+            convergence_criterion: AbstractConvergenceCriterion):
+        """
+        Creates a new BasicRestartOptimizer.
+
+        :param optimizer_builder: builds new optimizers for each iteration of this optimizer
+        :param genome_factory: creates Genome objects
+        :param population_size: population size for each underlying optimizer
+        :param convergence_criterion: convergence criterion used for evaluation of this optimizer
+        """
         self._optimizer_builder = optimizer_builder
         self._genome_factory = genome_factory
         self._population_size = population_size
@@ -12,8 +31,12 @@ class BasicRestartOptimizer(AbstractOptimizer):
         self._best_genome = None
 
     def next(self):
+        """
+        Performs the next iteration of optimization.
+
+        """
         new_optimizer = self._optimizer_builder\
-            .new_population()\
+            .clear()\
             .add_to_initial_population_from_factory(self._genome_factory, self._population_size)\
             .build()
 
@@ -27,9 +50,19 @@ class BasicRestartOptimizer(AbstractOptimizer):
             self._best_genome = new_optimizer.best_genome
 
     @property
-    def converged(self):
+    def converged(self) -> bool:
+        """
+        Whether or not this algorithm has converged
+
+        :return: true when this algorithm has converged or false if not
+        """
         return self._converged
 
     @property
-    def best_genome(self):
+    def best_genome(self) -> Genome:
+        """
+        The best genome so far
+
+        :return: a Genome instance
+        """
         return self._best_genome

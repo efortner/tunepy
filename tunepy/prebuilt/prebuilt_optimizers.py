@@ -1,4 +1,7 @@
+from typing import Tuple, Callable
+
 from tunepy import Genome
+from tunepy.interfaces import AbstractOptimizer
 from tunepy.optimizers.meta import BasicRestartOptimizer
 from tunepy.optimizers import BasicAnnealingOptimizer, BasicOptimizer, BasicGeneticOptimizer
 from tunepy.convergence import Iterations, ConsecutiveNonImprovement, ExponentialAnnealingSchedule
@@ -11,13 +14,27 @@ from tunepy.comparison import RouletteWheelComparer
 
 
 def new_random_restart_hill_climber(
-        dimensions,
-        restarts,
-        convergence_iterations,
-        epsilon,
-        fitness_func,
+        dimensions: Tuple,
+        restarts: int,
+        convergence_iterations: int,
+        epsilon: float,
+        fitness_func: Callable[..., float],
         *args,
-        **kwargs):
+        **kwargs) -> AbstractOptimizer:
+    """
+    Builds a new optimizer that generates and evaluates a candidate, finds a neighbor of this candidate,
+    and determines if the neighbor is more suitable than the original candidate. It performs this optimization a set
+    number of times.
+
+    :param dimensions: dimension of bitstrings passed into fitness_func
+    :param restarts: number of times to run the optimization
+    :param convergence_iterations: number candidates to evaluate without improvement before declaring convergence
+    :param epsilon: minimum required improvement between candidates to continue
+    :param fitness_func: function to optimize (accepts a bitstring)
+    :param args: will be passed into fitness_func
+    :param kwargs: will be passed into fitness_func
+    :return: a new optimizer
+    """
     random = NumpyRNG()
 
     random_genome_factory = \
@@ -59,14 +76,27 @@ def new_random_restart_hill_climber(
 
 
 def new_simulated_annealer(
-        dimensions,
-        max_neighbor_distance,
-        initial_temperature,
-        minimum_temperature,
-        degradation_multiplier,
-        fitness_func,
+        dimensions: Tuple,
+        max_neighbor_distance: int,
+        initial_temperature: float,
+        minimum_temperature: float,
+        degradation_multiplier: float,
+        fitness_func: Callable[..., float],
         *args,
         **kwargs):
+    """
+    Creates a new optimizer that optimizes by simulated annealing using a default temperature schedule.
+
+    :param dimensions: dimension of bitstrings passed into fitness_func
+    :param max_neighbor_distance: Manhattan distance allowed between neighbors
+    :param initial_temperature: starting temperature
+    :param minimum_temperature: minimum temperature before convergence
+    :param degradation_multiplier: temperature will be multiplied by this every iteration
+    :param fitness_func: function to optimize (accepts a bitstring)
+    :param args: will be passed into fitness_func
+    :param kwargs: will be passed into fitness_func
+    :return: a new optimizer
+    """
     random = NumpyRNG()
 
     neighbor_genome_factory = \
@@ -101,12 +131,24 @@ def new_simulated_annealer(
 
 
 def new_hill_climber(
-        dimensions,
-        convergence_iterations,
-        epsilon,
-        fitness_func,
+        dimensions: Tuple,
+        convergence_iterations: int,
+        epsilon: float,
+        fitness_func: Callable[..., float],
         *args,
         **kwargs):
+    """
+    Builds a new optimizer that generates and evaluates a candidate, finds a neighbor of this candidate,
+    and determines if the neighbor is more suitable than the original candidate.
+
+    :param dimensions: dimension of bitstrings passed into fitness_func
+    :param convergence_iterations: number candidates to evaluate without improvement before declaring convergence
+    :param epsilon: minimum required improvement between candidates to continue
+    :param fitness_func: function to optimize (accepts a bitstring)
+    :param args: will be passed into fitness_func
+    :param kwargs: will be passed into fitness_func
+    :return: a new optimizer
+    """
     random = NumpyRNG()
 
     neighbor_genome_factory = \
@@ -136,14 +178,29 @@ def new_hill_climber(
 
 
 def new_genetic_optimizer(
-        dimensions,
-        population_size,
-        mutation_rate,
-        convergence_iterations,
-        epsilon,
-        fitness_func,
+        dimensions: Tuple,
+        population_size: int,
+        mutation_rate: float,
+        convergence_iterations: int,
+        epsilon: float,
+        fitness_func: Callable[..., float],
         *args,
         **kwargs):
+    """
+    Builds a new optimizer that evaluates a population's fitness, probabilistically chooses the best candidates,
+    and constructs a new population from the old. It continues this until the best candidate from the population is
+    no longer improving between generations.
+
+    :param dimensions:
+    :param population_size: population size of each generation
+    :param mutation_rate: probability of a single candidate mutating
+    :param convergence_iterations: number candidates to evaluate without improvement before declaring convergence
+    :param epsilon: minimum required improvement between candidates to continue
+    :param fitness_func: function to optimize (accepts a bitstring)
+    :param args: will be passed into fitness_func
+    :param kwargs: will be passed into fitness_func
+    :return: a new optimizer
+    """
     random = NumpyRNG()
 
     comparer = RouletteWheelComparer(random)
