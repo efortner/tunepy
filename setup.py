@@ -1,23 +1,26 @@
 import setuptools
 
-long_description = \
-    """Tunepy2 is a collection of bitstring optimizers designed to be easy to use yet extensible. Tunepy2 also 
-    contains a set of tools to help use bitstring optimizers to optimize hyperparameters for machine learning models."""
+with open('README.md') as f:
+    long_description = f.read()
 
 setuptools.setup(
     name="tunepy2",
     version="0.0.1",
     author="Ethan Fortner",
-    author_email="ethan.fortner@icloud.co,",
-    description="A small example package",
+    author_email='ethan.fortner@icloud.com',
+    description="A package containing a set of bitstring optimizers.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/pypa/sampleproject",
-    packages=setuptools.find_packages(),
+    url="https://github.com/efortner/tunepy",
+    packages=setuptools.find_packages(exclude='test'),
     classifiers=[
-        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.7",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.7',
+    install_requires=[
+        'scikit-learn==0.23.2',
+        'numpy==1.19.2',
+    ]
 )
