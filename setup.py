@@ -5,7 +5,7 @@ with open('README.md') as f:
 
 setuptools.setup(
     name="tunepy2",
-    version="0.0.1",
+    version="0.0.2",
     author="Ethan Fortner",
     author_email='ethan.fortner@icloud.com',
     description="A package containing a set of bitstring optimizers.",
