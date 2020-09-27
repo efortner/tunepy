@@ -1,8 +1,8 @@
 import unittest
 
-from tunepy.interfaces.stubs import ConstantFitnessLearner
-from tunepy.validators import TimeSeriesCrossValidator
-from tunepy import TimeSeriesCrossValidatorBinException, DimensionsMismatchException
+from tunepy2.interfaces.stubs import ConstantFitnessLearner
+from tunepy2.validators import TimeSeriesCrossValidator
+from tunepy2 import TimeSeriesCrossValidatorBinException, DimensionsMismatchException
 
 
 class TestTimeSeriesCrossValidator(unittest.TestCase):

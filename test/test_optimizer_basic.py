@@ -1,8 +1,8 @@
 import unittest
 
-from tunepy import Genome
-from tunepy.interfaces.stubs import PassThroughConvergenceCriterion, PassThroughGenomeFactory
-from tunepy.optimizers import BasicOptimizer
+from tunepy2 import Genome
+from tunepy2.interfaces.stubs import PassThroughConvergenceCriterion, PassThroughGenomeFactory
+from tunepy2.optimizers import BasicOptimizer
 
 
 class TestOptimizerBasic(unittest.TestCase):

@@ -1,5 +1,5 @@
 import unittest
-from tunepy.convergence import ConsecutiveNonImprovement
+from tunepy2.convergence import ConsecutiveNonImprovement
 
 
 class TestConsecutiveNonImprovement(unittest.TestCase):

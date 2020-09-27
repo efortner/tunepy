@@ -1,8 +1,8 @@
 import unittest
 
-from tunepy import Genome
-from tunepy.comparison import RouletteWheelComparer
-from tunepy.interfaces import AbstractRandomNumberGenerator
+from tunepy2 import Genome
+from tunepy2.comparison import RouletteWheelComparer
+from tunepy2.interfaces import AbstractRandomNumberGenerator
 
 
 class TestRouletteWheelComparer(unittest.TestCase):

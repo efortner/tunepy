@@ -1,7 +1,7 @@
 import unittest
-from tunepy.genome_factory import SinglePointCrossoverGenomeFactory
-from tunepy.interfaces.stubs import IncrementalComparer, NumpyOnesRandom, NumpyPassThroughRandom, NumpyCustomRandom
-from tunepy.internal import DimensionsMismatchException, Genome
+from tunepy2.genome_factory import SinglePointCrossoverGenomeFactory
+from tunepy2.interfaces.stubs import IncrementalComparer, NumpyOnesRandom, NumpyPassThroughRandom, NumpyCustomRandom
+from tunepy2.internal import DimensionsMismatchException, Genome
 import numpy as np
 
 

@@ -1,7 +1,7 @@
 import unittest
-from tunepy.validators import TrainTestValidator
-from tunepy.internal import *
-from tunepy.interfaces.stubs import *
+from tunepy2.validators import TrainTestValidator
+from tunepy2.internal import *
+from tunepy2.interfaces.stubs import *
 
 
 class TestTrainTestValidator(unittest.TestCase):

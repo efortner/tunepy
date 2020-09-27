@@ -1,5 +1,5 @@
 import unittest
-from tunepy.random import PythonBaseRNG
+from tunepy2.random import PythonBaseRNG
 
 
 class TestPythonBaseRNG(unittest.TestCase):

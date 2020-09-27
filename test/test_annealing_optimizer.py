@@ -1,8 +1,8 @@
 import unittest
 
-from tunepy.interfaces.stubs import PassThroughAnnealingSchedule, PassThroughGenomeFactory, NumpyCustomRandom
-from tunepy.optimizers import BasicAnnealingOptimizer
-from tunepy.internal import Genome
+from tunepy2.interfaces.stubs import PassThroughAnnealingSchedule, PassThroughGenomeFactory, NumpyCustomRandom
+from tunepy2.optimizers import BasicAnnealingOptimizer
+from tunepy2.internal import Genome
 
 
 class TestAnnealingOptimizer(unittest.TestCase):

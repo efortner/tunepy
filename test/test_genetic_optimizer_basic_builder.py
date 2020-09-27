@@ -1,11 +1,11 @@
 import unittest
 
-from tunepy.optimizers import BasicGeneticOptimizer
-from tunepy.optimizers.builders import BasicGeneticOptimizerBuilder
-from tunepy.interfaces.stubs import PassThroughConvergenceCriterion
-from tunepy.interfaces.stubs import PassThroughGenomeFactory
-from tunepy.random import NumpyRNG
-from tunepy import Genome, InitialPopulationUndefinedException
+from tunepy2.optimizers import BasicGeneticOptimizer
+from tunepy2.optimizers.builders import BasicGeneticOptimizerBuilder
+from tunepy2.interfaces.stubs import PassThroughConvergenceCriterion
+from tunepy2.interfaces.stubs import PassThroughGenomeFactory
+from tunepy2.random import NumpyRNG
+from tunepy2 import Genome, InitialPopulationUndefinedException
 
 
 class TestGeneticOptimizerBasicBuilder(unittest.TestCase):

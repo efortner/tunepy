@@ -1,10 +1,10 @@
 import unittest
 
-from tunepy.optimizers.meta import BasicRestartOptimizer
-from tunepy.optimizers.builders import BasicOptimizerBuilder
-from tunepy.interfaces.stubs import PassThroughGenomeFactory, PassThroughConvergenceCriterion
-from tunepy.random import NumpyRNG
-from tunepy import Genome
+from tunepy2.optimizers.meta import BasicRestartOptimizer
+from tunepy2.optimizers.builders import BasicOptimizerBuilder
+from tunepy2.interfaces.stubs import PassThroughGenomeFactory, PassThroughConvergenceCriterion
+from tunepy2.random import NumpyRNG
+from tunepy2 import Genome
 
 
 class TestOptimizerBasicRestart(unittest.TestCase):

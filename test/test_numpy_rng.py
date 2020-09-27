@@ -1,5 +1,5 @@
 import unittest
-from tunepy.random import NumpyRNG
+from tunepy2.random import NumpyRNG
 import numpy as np
 
 

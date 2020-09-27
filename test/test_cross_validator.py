@@ -1,7 +1,7 @@
 import unittest
-from tunepy.validators import CrossValidator
-from tunepy import *
-from tunepy.interfaces.stubs import *
+from tunepy2.validators import CrossValidator
+from tunepy2 import *
+from tunepy2.interfaces.stubs import *
 
 
 class TestCrossValidator(unittest.TestCase):

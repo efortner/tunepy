@@ -1,11 +1,11 @@
 import unittest
 
-from tunepy.optimizers import BasicAnnealingOptimizer
-from tunepy.optimizers.builders import BasicAnnealerOptimizerBuilder
-from tunepy.interfaces.stubs import PassThroughAnnealingSchedule
-from tunepy.interfaces.stubs import PassThroughGenomeFactory
-from tunepy.random import NumpyRNG
-from tunepy import Genome, InitialPopulationUndefinedException
+from tunepy2.optimizers import BasicAnnealingOptimizer
+from tunepy2.optimizers.builders import BasicAnnealerOptimizerBuilder
+from tunepy2.interfaces.stubs import PassThroughAnnealingSchedule
+from tunepy2.interfaces.stubs import PassThroughGenomeFactory
+from tunepy2.random import NumpyRNG
+from tunepy2 import Genome, InitialPopulationUndefinedException
 
 
 class TestOptimizerBasicBuilder(unittest.TestCase):

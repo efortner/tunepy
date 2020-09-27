@@ -1,7 +1,7 @@
 import unittest
-from tunepy import new_random_restart_hill_climber, new_simulated_annealer, new_hill_climber, new_genetic_optimizer
-from tunepy.optimizers.meta import BasicRestartOptimizer
-from tunepy.optimizers import BasicAnnealingOptimizer, BasicOptimizer, BasicGeneticOptimizer
+from tunepy2 import new_random_restart_hill_climber, new_simulated_annealer, new_hill_climber, new_genetic_optimizer
+from tunepy2.optimizers.meta import BasicRestartOptimizer
+from tunepy2.optimizers import BasicAnnealingOptimizer, BasicOptimizer, BasicGeneticOptimizer
 
 
 class TestPrebuiltOptimizers(unittest.TestCase):

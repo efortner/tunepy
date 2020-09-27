@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from tunepy import transform_bitstring_to_layers_tuple
+from tunepy2 import transform_bitstring_to_layers_tuple
 
 
 class TestTransformBitstringToLayersTuple(unittest.TestCase):
