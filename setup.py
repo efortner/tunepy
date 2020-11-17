@@ -5,7 +5,7 @@ with open('README.md') as f:
 
 setuptools.setup(
     name="tunepy2",
-    version="0.0.2",
+    version="0.0.3",
     author="Ethan Fortner",
     author_email='ethan.fortner@icloud.com',
     description="A package containing a set of bitstring optimizers.",
@@ -20,7 +20,7 @@ setuptools.setup(
     ],
     python_requires='>=3.7',
     install_requires=[
-        'scikit-learn==0.23.2',
-        'numpy==1.19.2',
+        'scikit-learn>=0.23.2',
+        'numpy>=1.19.2',
     ]
 )
