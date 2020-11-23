@@ -29,4 +29,5 @@ import tunepy2 as tp
 * Basic Hill Climber ([`tp.new_hill_climber`](https://github.com/efortner/tunepy/blob/master/tunepy2/prebuilt/prebuilt_optimizers.py#L133))
 * Genetic Algorithm ([`tp.new_genetic_optimizer`](https://github.com/efortner/tunepy/blob/master/tunepy2/prebuilt/prebuilt_optimizers.py#L180))
 
-Fitness functions are assumed have an array-like passed in as the first argument and return a fitness value.
+Fitness functions accept an array-like bit string as their first argument and return a floating point fitness value where
+higher values are considered to be more fit.
